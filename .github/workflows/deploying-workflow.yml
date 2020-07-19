@@ -1,0 +1,32 @@
+name: deploying workflow
+
+# This workflow is triggered on pushes to the repository.
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    # Job name is Greeting
+    name: Deploy
+    # This job runs on Linux
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      # This step uses GitHub's hello-world-javascript-action: https://github.com/actions/hello-world-javascript-action
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm run build
+        env:
+          GATSBY_DATABASE_URI: ${{ secrets.GATSBY_DATABASE_URI }}
+      - run: npm run deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: "eu-west-1"

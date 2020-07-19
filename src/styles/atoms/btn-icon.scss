@@ -1,0 +1,34 @@
+.social-btns .btn,
+.social-btns .btn .fa {
+  transition: all 0.35s;
+  transition-timing-function: cubic-bezier(0.31, -0.105, 0.43, 1.59);
+}
+.social-btns .btn .fa {
+  -webkit-transform: scale(0.8);
+  transform: scale(0.8);
+}
+.social-btns .btn:focus .fa,
+.social-btns .btn:hover .fa {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+.social-btns {
+  height: 90px;
+  font-size: 0;
+  text-align: center;
+}
+.social-btns .btn {
+  display: inline-block;
+  width: 90px;
+  height: 90px;
+  line-height: 90px;
+  margin: 0 10px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  opacity: 0.99;
+}
+.social-btns .btn .fa {
+  font-size: 38px;
+  vertical-align: middle;
+}

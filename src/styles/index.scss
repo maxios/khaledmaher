@@ -1,0 +1,75 @@
+$browser-context: 16;
+
+@function em($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}em
+}
+
+@mixin font($font-family, $font-file) {
+  @font-face {
+    font-family: $font-family;
+    src: url($font-file+'.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+}
+
+@include font('Roboto-Black', '../statics/fonts/Roboto-Black');
+@include font('Roboto-BlackItalic', '../statics/fonts/Roboto-BlackItalic');
+@include font('Roboto-Bold', '../statics/fonts/Roboto-Bold');
+@include font('Roboto-BoldItalic', '../statics/fonts/Roboto-BoldItalic');
+@include font('Roboto-Italic', '../statics/fonts/Roboto-Italic');
+@include font('Roboto-Light', '../statics/fonts/Roboto-Light');
+@include font('Roboto-LightItalic', '../statics/fonts/Roboto-LightItalic');
+@include font('Roboto-Medium', '../statics/fonts/Roboto-Medium');
+@include font('Roboto-MediumItalic', '../statics/fonts/Roboto-MediumItalic');
+@include font('Roboto-Regular', '../statics/fonts/Roboto-Regular');
+@include font('Roboto-Thin', '../statics/fonts/Roboto-Thin');
+@include font('Roboto-ThinItalic', '../statics/fonts/Roboto-ThinItalic');
+@include font('RobotoCondensed-Bold', '../statics/fonts/RobotoCondensed-Bold');
+@include font('RobotoCondensed-BoldItalic', '../statics/fonts/RobotoCondensed-BoldItalic');
+@include font('RobotoCondensed-Italic', '../statics/fonts/RobotoCondensed-Italic');
+@include font('RobotoCondensed-Light', '../statics/fonts/RobotoCondensed-Light');
+@include font('RobotoCondensed-LightItalic', '../statics/fonts/RobotoCondensed-LightItalic');
+@include font('RobotoCondensed-Regular', '../statics/fonts/RobotoCondensed-Regular');
+
+@import "bulma/bulma.sass";
+@import 'common.scss';
+@import 'typography.scss';
+@import 'alignments.scss';
+@import './atoms/block.scss';
+@import "./atoms/btn-icon.scss";
+
+@import './molecules/block-list.scss';
+@import './molecules/linkedinBadge.scss';
+@import './molecules/post.scss';
+
+@import './organisms/main-block.scss';
+@import './organisms/sidebar.scss';
+@import './organisms/corner_menu';
+
+body {
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.absolute-center {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+}
+
+.dummy-size {
+  width: em(400);
+  height: em(400);
+}
+
+h1{
+  font-family: 'RobotoCondensed-Regular';
+  font-size: em(24)
+}
+
+h2 {
+  font-family: 'Roboto-Regular';
+}
