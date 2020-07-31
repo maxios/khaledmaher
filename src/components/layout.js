@@ -7,7 +7,6 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import Sidebar from '@organisms/sidebar';
 
 import "./layout.css"
 import SEO from "./seo.js"
@@ -16,7 +15,6 @@ const Layout = ({ children }) => {
   return (
     <>
       <SEO title="Khaled Maher | Software Engineer" />
-      <Sidebar/>
       {children}
     </>
   )

@@ -6,8 +6,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Photo from '@images/photo.png';
-import Navbar from '@organisms/navbar';
-import CornerMenu from '@organisms/corner_menu';
+import Navbar from '@components/navbar';
 
 config.autoAddCss = false
 
@@ -21,7 +20,6 @@ const IndexPage = () => {
       <Navbar/>
       <img src={Photo} width={avatarDimension} className="avatar"/>
       <h1 className="greetings"> Hello, 👋 </h1>
-      <CornerMenu/>
     </div>
   )
 }

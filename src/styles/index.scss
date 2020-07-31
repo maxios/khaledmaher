@@ -36,16 +36,6 @@ $browser-context: 16;
 @import 'common.scss';
 @import 'typography.scss';
 @import 'alignments.scss';
-@import './atoms/block.scss';
-@import "./atoms/btn-icon.scss";
-
-@import './molecules/block-list.scss';
-@import './molecules/linkedinBadge.scss';
-@import './molecules/post.scss';
-
-@import './organisms/main-block.scss';
-@import './organisms/sidebar.scss';
-@import './organisms/corner_menu';
 
 body {
   width: 100%;

@@ -48,9 +48,6 @@ module.exports = {
         alias: {
           "@src": "src",
           "@components": "src/components",
-          "@atoms": "src/components/atoms",
-          "@molecules": "src/components/molecules",
-          "@organisms": "src/components/organisms",
           "@constants": "src/constants",
           "@layouts": "src/layouts",
           "@pages": "src/pages",
