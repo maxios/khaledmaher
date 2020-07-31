@@ -24,16 +24,16 @@ const IndexPage = () => {
           <div className="home__greetings text-centered">
             <h1 className="greetings font-white text-centered"> Hi </h1>
           </div>
-          <div className="home__content d-flex justify-content-center">
-            <div className="home__choice">
+          <div className="home__content d-flex flex-column flex-sm-row justify-content-center">
+            <div className="home__choice text-centered">
               <h2 className="font__RC-regular">Personal</h2>
               <ul>
-                <li> Blog </li>
                 <li> Pockets </li>
+                <li> Blog </li>
               </ul>
             </div>
 
-            <div className="home__choice">
+            <div className="home__choice text-centered">
               <h2 className="font__RC-regular">Professional</h2>
               <ul>
                 <li> Portfolio </li>

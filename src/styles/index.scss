@@ -13,6 +13,11 @@ $browser-context: 16;
   }
 }
 
+#___gatsby,
+#gatsby-focus-wrapper {
+  height: 100%;
+}
+
 .shadow-frame {
   box-shadow: 0 -4px 19px 9px rgba(0, 0, 0, 0.15);
 }

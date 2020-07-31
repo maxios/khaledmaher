@@ -8,15 +8,21 @@ const Footer = () => (
   <div className="footer__container d-flex flex-column justify-content-center">
     <div className="footer__social d-flex justify-content-center">
       <div className="footer__social-icon pointer">
-        <SVG id={TwitterIcon.id} size={20} color="#9BA6BF"/>
+        <a target="_blank" rel="noreferrer" href="https://twitter.com/animaxios">
+          <SVG id={TwitterIcon.id} size={20} color="#9BA6BF"/>
+        </a>
       </div>
 
       <div className="footer__social-icon pointer">
-        <SVG id={LinkedinIcon.id} size={20} color="#9BA6BF"/>
+        <a target="_blank" rel="noreferrer" href="https://linkedin.com/in/khaledmaher">
+          <SVG id={LinkedinIcon.id} size={20} color="#9BA6BF"/>
+        </a>
       </div>
 
       <div className="footer__social-icon pointer">
-        <SVG id={GithubIcon.id} size={20} color="#9BA6BF"/>
+        <a target="_blank" rel="noreferrer" href="https://github.com/maxios">
+          <SVG id={GithubIcon.id} size={20} color="#9BA6BF"/>
+        </a>
       </div>
     </div>
     <div className="footer__copyright font__RC-light text-centered">

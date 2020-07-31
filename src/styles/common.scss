@@ -20,3 +20,8 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
        cursor: pointer;
 }
 
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}

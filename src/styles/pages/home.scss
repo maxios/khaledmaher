@@ -1,9 +1,9 @@
 .background {
-  height: 100vh;
+  height: 100%;
   background-color: $color-primary;
 }
 .home__container {
-  padding-top: 20vh;
+  padding-top: 10vw;
 }
 .home__photo {
   display: block;
@@ -13,7 +13,6 @@
 .home__content {
   margin-top: em(50)
 }
-
 .home__choice {
-  margin: 0 50px;
+  margin: 0 50px 50px 50px;
 }
