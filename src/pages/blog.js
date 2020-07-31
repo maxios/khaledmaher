@@ -1,4 +1,10 @@
-// import React from 'react'
+import React from 'react'
+
+const BlogPage = () => (
+  <div> blog </div>
+)
+
+export default BlogPage;
 // import ReactMarkdown from 'react-markdown';
 // import { StaticQuery, graphql } from "gatsby"
 // import Layout from '../components/layout.js';
