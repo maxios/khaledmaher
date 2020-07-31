@@ -13,6 +13,17 @@ $browser-context: 16;
   }
 }
 
+.shadow-frame {
+  box-shadow: 0 -4px 19px 9px rgba(0, 0, 0, 0.15);
+}
+
+.text-unselectable {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
 @include font('Roboto-Black', '../statics/fonts/Roboto-Black');
 @include font('Roboto-BlackItalic', '../statics/fonts/Roboto-BlackItalic');
 @include font('Roboto-Bold', '../statics/fonts/Roboto-Bold');
@@ -32,9 +43,8 @@ $browser-context: 16;
 @include font('RobotoCondensed-LightItalic', '../statics/fonts/RobotoCondensed-LightItalic');
 @include font('RobotoCondensed-Regular', '../statics/fonts/RobotoCondensed-Regular');
 
-@import 'variables.scss';
-@import "bulma/bulma.sass";
 @import 'common.scss';
+@import 'variables.scss';
 @import 'typography.scss';
 @import 'alignments.scss';
 
@@ -42,30 +52,5 @@ $browser-context: 16;
 
 // components
 @import 'components/photo.scss';
-
-body {
-  width: 100%;
-  height: 100vh;
-  padding: 0;
-  margin: 0;
-}
-
-.absolute-center {
-  position: absolute;
-  top: 30%;
-  left: 30%;
-}
-
-.dummy-size {
-  width: em(400);
-  height: em(400);
-}
-
-h1{
-  font-family: 'RobotoCondensed-Regular';
-  font-size: em(24)
-}
-
-h2 {
-  font-family: 'Roboto-Regular';
-}
+@import 'components/footer.scss';
+@import 'components/layout.scss';

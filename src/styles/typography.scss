@@ -1,10 +1,6 @@
 .greetings {
-  font-size: em(50);
+  font-size: em(42);
   font-family: "Roboto-Light";
-}
-
-.subtitle--small {
-  font-size: em(14);
 }
 
 .font-white {
@@ -13,4 +9,13 @@
 
 .text-centered {
   text-align: center;
+}
+
+// fonts
+.font__RC-light {
+  font-family: 'RobotoCondensed-Light'
+}
+
+.font__RC-regular {
+  font-family: 'RobotoCondensed-Regular'
 }

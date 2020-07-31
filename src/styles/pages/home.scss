@@ -2,16 +2,18 @@
   height: 100vh;
   background-color: $color-primary;
 }
-
 .home__container {
-  padding-top: 30vh;
+  padding-top: 20vh;
 }
-
 .home__photo {
   display: block;
   text-align: center;
 }
+.home__greetings,
+.home__content {
+  margin-top: em(50)
+}
 
-.home__greetings {
-  margin-top: em(80)
+.home__choice {
+  margin: 0 50px;
 }
