@@ -1,6 +1,6 @@
 .footer__container {
   //alignment
-  // position: absolute;
+  position: fixed;
   bottom: 0;
 
   padding: 10px 0;
@@ -17,6 +17,6 @@
   margin: 0 15px;
 }
 
-.footer__social-icon svg:hover {
+.icon svg:hover {
   fill: $color-link !important;
 }

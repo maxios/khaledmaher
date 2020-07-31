@@ -1,4 +1,5 @@
 import React from "react";
+import Link from 'gatsby-plugin-transition-link';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-svg-core/styles.css'
@@ -26,7 +27,9 @@ const IndexPage = () => {
           </div>
           <div className="home__content d-flex flex-column flex-sm-row justify-content-center">
             <div className="home__choice text-centered">
-              <h2 className="font__RC-regular">Personal</h2>
+              <Link to="/intro">
+                <h2 className="font__RC-regular">Personal</h2>
+              </Link>
               <ul>
                 <li> Pockets </li>
                 <li> Blog </li>

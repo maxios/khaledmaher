@@ -1,0 +1,41 @@
+.intro__header {
+  background-color: $color-primary-dark;
+  height: em(200);
+}
+.intro__content {
+  position: relative;
+}
+.intro__photo-container {
+  position: absolute;
+  top: -120px;
+  left: em(130);
+  z-index:2;
+
+  @include breakpoint(mobile) { left: 0; right:0; margin-left: auto; margin-right: auto }
+}
+.intro__social {
+}
+.intro__social .icon:first-child,
+.intro__social .icon:last-child {
+  transform: translateY(-30px)
+}
+.intro__message {
+  padding-top: em(200)
+}
+
+.intro__posts {
+  position: relative;
+}
+// seperator
+// .intro__posts::before {
+//   content: '';
+//   position: absolute;
+//   top: 20%;
+//   left: 0;
+//   display: block;
+//   width: 2px;
+//   height: 100%;
+//   background-color: $color-primary-light;
+//
+//   @include breakpoint(mobile) { display: none }
+// }

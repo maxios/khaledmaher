@@ -27,7 +27,8 @@ module.exports = {
     "gatsby-plugin-sharp",
     "gatsby-plugin-manifest",
     "gatsby-plugin-offline",
-    'gatsby-plugin-svg-sprite',
+    "gatsby-plugin-svg-sprite",
+    "gatsby-plugin-transition-link",
     "gatsby-plugin-sass",
     {
       resolve: `gatsby-source-mongodb`,

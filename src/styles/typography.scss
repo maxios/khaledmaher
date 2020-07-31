@@ -1,16 +1,3 @@
-.greetings {
-  font-size: em(42);
-  font-family: "Roboto-Light";
-}
-
-.font-white {
-  color: $color-white;
-}
-
-.text-centered {
-  text-align: center;
-}
-
 // fonts
 .font__RC-light {
   font-family: 'RobotoCondensed-Light'
@@ -18,4 +5,47 @@
 
 .font__RC-regular {
   font-family: 'RobotoCondensed-Regular'
+}
+
+.font__R-light {
+  font-family: 'Roboto-Light'
+}
+
+.font__R-medium {
+  font-family: 'Roboto-Medium'
+}
+
+// components
+.greetings {
+  font-size: em(42);
+  font-family: "Roboto-Light";
+}
+
+.font__title--big {
+  @extend .font__R-light;
+  font-size: em(38);
+}
+
+.font__title {
+  @extend .font__R-light;
+  font-size: em(24);
+}
+
+.font__body {
+  @extend .font__R-light;
+  font-size: em(14);
+}
+
+.font__message {
+  @extend .font__R-light;
+  font-size: em(18);
+}
+
+
+.font-white {
+  color: $color-white;
+}
+
+.text-centered {
+  text-align: center;
 }
