@@ -1,8 +1,16 @@
 .greetings {
-  font-size: em(200);
-  font-family: "Roboto-Bold";
+  font-size: em(50);
+  font-family: "Roboto-Light";
 }
 
 .subtitle--small {
   font-size: em(14);
+}
+
+.font-white {
+  color: $color-white;
+}
+
+.text-centered {
+  text-align: center;
 }

@@ -1,0 +1,17 @@
+.background {
+  height: 100vh;
+  background-color: $color-primary;
+}
+
+.home__container {
+  padding-top: 30vh;
+}
+
+.home__photo {
+  display: block;
+  text-align: center;
+}
+
+.home__greetings {
+  margin-top: em(80)
+}

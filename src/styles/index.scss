@@ -32,10 +32,16 @@ $browser-context: 16;
 @include font('RobotoCondensed-LightItalic', '../statics/fonts/RobotoCondensed-LightItalic');
 @include font('RobotoCondensed-Regular', '../statics/fonts/RobotoCondensed-Regular');
 
+@import 'variables.scss';
 @import "bulma/bulma.sass";
 @import 'common.scss';
 @import 'typography.scss';
 @import 'alignments.scss';
+
+@import 'pages/home.scss';
+
+// components
+@import 'components/photo.scss';
 
 body {
   width: 100%;

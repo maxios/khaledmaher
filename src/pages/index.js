@@ -5,21 +5,24 @@ import { config, library } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Photo from '@images/photo.png';
-import Navbar from '@components/navbar';
+import Photo from '@components/photo';
 
 config.autoAddCss = false
 
 library.add(faBars);
 
 const IndexPage = () => {
-  const avatarDimension = 200;
 
   return (
-    <div>
-      <Navbar/>
-      <img src={Photo} width={avatarDimension} className="avatar"/>
-      <h1 className="greetings"> Hello, 👋 </h1>
+    <div className="background">
+      <div className="home__container">
+        <div className="home__photo">
+          <Photo width={180}/>
+        </div>
+        <div className="home__greetings">
+          <h1 className="greetings font-white text-centered"> Hi </h1>
+        </div>
+      </div>
     </div>
   )
 }
