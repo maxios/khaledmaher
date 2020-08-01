@@ -1,6 +1,13 @@
 .intro__header {
+  position: relative;
   background-color: $color-primary-dark;
   height: em(200);
+}
+.intro__navbar {
+  @extend .font__title;
+  position: absolute;
+  color: $color-white;
+  bottom: 0;
 }
 .intro__content {
   position: relative;
@@ -20,11 +27,14 @@
   transform: translateY(-30px)
 }
 .intro__message {
-  padding-top: em(200)
+  padding-top: em(150)
 }
 
 .intro__posts {
   position: relative;
+}
+.intro__post {
+  margin-bottom: em(20)
 }
 // seperator
 // .intro__posts::before {
