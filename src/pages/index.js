@@ -24,7 +24,16 @@ const IndexPage = () => {
           </div>
           <div className="home__greetings text-centered">
             <h1 className="greetings font-white text-centered"> Hi </h1>
+            <br/>
+            <p className="p-4 font__message">
+              Dedicated Software Engineer experienced in crafting software products using various stacks alongside with AWS Services.
+              <br/>I assure the best performance, Code Readability, and fast delivery.
+            </p>
+
+            <br/>
+            <p className="font__RC-regular">contact me at: khaled.mailhub@gmail.com</p>
           </div>
+    {/*
           <div className="home__content d-flex flex-column flex-sm-row justify-content-center">
             <div className="home__choice text-centered">
               <Link to="/intro">
@@ -44,6 +53,7 @@ const IndexPage = () => {
               </ul>
             </div>
           </div>
+          */}
         </div>
       </Layout>
     </div>
