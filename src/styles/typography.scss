@@ -28,12 +28,13 @@
 
 .font__title {
   @extend .font__R-light;
+  line-height: em(20);
   font-size: em(24);
 }
 
 .font__body {
   @extend .font__R-light;
-  font-size: em(14);
+  font-size: em(8);
 }
 
 .font__message {

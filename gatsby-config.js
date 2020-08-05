@@ -35,7 +35,11 @@ module.exports = {
       options: {
         connectionString: process.env.GATSBY_DATABASE_URI,
         dbName: `khaledmaher-cms`,
-        collection: ['posts']
+        collection: ['posts', 'upload_file', 'taggings'],
+        extraParams: {
+          preserveObjectIds: true,
+        },
+        preserveObjectIds: true
       }
     },
     {
@@ -50,6 +54,7 @@ module.exports = {
         alias: {
           "@src": "src",
           "@components": "src/components",
+          "@templates": "src/templates",
           "@constants": "src/constants",
           "@layouts": "src/layouts",
           "@pages": "src/pages",
@@ -76,4 +81,7 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
+  mapping: {
+    "mongodbKhaledmahercmsPosts.hero": "mongodbKhaledmahercmsUpload_file.mongodb_id"
+  },
 }
