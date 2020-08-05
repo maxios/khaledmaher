@@ -5,6 +5,7 @@
  */
 
 const path = require(`path`);
+const slugify = require('slugify');
 
 const makeRequest = (graphql, request) => new Promise((resolve, reject) => {
   // Query for nodes to use in creating pages.
@@ -31,6 +32,7 @@ exports.createPages = ({ actions, graphql }) => {
        allMongodbKhaledmahercmsPosts {
          nodes {
            id
+           title
          }
        }
      }
@@ -38,7 +40,7 @@ exports.createPages = ({ actions, graphql }) => {
      // Create pages for each blog.
      result.data.allMongodbKhaledmahercmsPosts.nodes.forEach(node => {
        createPage({
-         path: `/blog/${node.id}`,
+         path: `/blog/${slugify(node.title)}`,
          component: path.resolve(`src/templates/post.js`),
          context: {
            id: node.id,

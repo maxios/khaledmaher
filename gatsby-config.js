@@ -35,7 +35,7 @@ module.exports = {
       options: {
         connectionString: process.env.GATSBY_DATABASE_URI,
         dbName: `khaledmaher-cms`,
-        collection: ['posts', 'upload_file', 'taggings'],
+        collection: ['posts', 'upload_file', 'tags'],
         extraParams: {
           preserveObjectIds: true,
         },
