@@ -55,7 +55,6 @@ exports.createPages = ({ actions, graphql }) => {
      })
 
      result.data.allMongodbKhaledmahercmsTags.nodes.forEach(node => {
-       console.log(node.name);
        createPage({
          path: `/blog/tag/${slugify(node.name)}`,
          component: path.resolve(`src/pages/blog.js`),
