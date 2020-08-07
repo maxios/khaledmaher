@@ -5,7 +5,7 @@ import Slugify from 'slugify';
 import * as timeago from 'timeago.js';
 
 const PostItem = ({data}) => {
-  const heroUrl = process.env.production ?
+  const heroUrl = process.env.NODE_ENV === 'production' ?
     data.hero.url :
     'https://www.designmantic.com/blog/wp-content/uploads/2016/07/social-media-cover-image-718x300.png'
 
