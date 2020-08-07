@@ -35,6 +35,12 @@ exports.createPages = ({ actions, graphql }) => {
            title
          }
        }
+       allMongodbKhaledmahercmsTags {
+        nodes {
+          id,
+          name
+        }
+       }
      }
      `).then(result => {
      // Create pages for each blog.
@@ -43,12 +49,23 @@ exports.createPages = ({ actions, graphql }) => {
          path: `/blog/${slugify(node.title)}`,
          component: path.resolve(`src/templates/post.js`),
          context: {
+           id: node.id
+         },
+       })
+     })
+
+     result.data.allMongodbKhaledmahercmsTags.nodes.forEach(node => {
+       console.log(node.name);
+       createPage({
+         path: `/blog/tag/${slugify(node.name)}`,
+         component: path.resolve(`src/pages/blog.js`),
+         context: {
            id: node.id,
+           tag: [node.name]
          },
        })
      })
    });
 
-   // Query for posts nodes to use in creating pages.
-   return getPosts;
+  return getPosts;
 };

@@ -1,10 +1,11 @@
 .blogitem__container {
-  height: em(250);
-}
-.blogitem__container:hover {
-  box-shadow: 0 8px 17px -5px rgba(0,0,0,0.12);
+  min-height: em(250);
 }
 .blogitem__hero {}
+.blogitem__image {
+  object-fit: cover;
+  @include for-tablet-portrait-down { width: 100%; height: 100%}
+}
 .blogitem__content {}
 .blogitem__title {}
 .blogitem__text {}

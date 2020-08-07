@@ -7,13 +7,18 @@ import { graphql } from 'gatsby'
 
 const PostTemplate = ({ data }) => {
   const post = data.mongodbKhaledmahercmsPosts;
+  const heroUrl = process.env.production ?
+    data.hero.url :
+    'https://www.designmantic.com/blog/wp-content/uploads/2016/07/social-media-cover-image-718x300.png'
+
   return (
     <Layout>
       <div className="mb-4 postTemplate__hero">
-        <img src={post.hero.url} className="postTemplate__image"/>
+        <img src={heroUrl} className="postTemplate__image"/>
       </div>
       <div className="container font__message postTemplate__container">
         <h1 className="font__title--big">{post.title}</h1>
+        <br/>
         <ReactMarkdown source={post.content}/>
       </div>
     </Layout>
@@ -27,8 +32,10 @@ PostTemplate.propTypes = {
 export default PostTemplate
 
 export const query = graphql`
-  query MongoDb($id: String!) {
-    mongodbKhaledmahercmsPosts(id: {eq: $id}) {
+  query Post($id: String!) {
+    mongodbKhaledmahercmsPosts(
+      id: {eq: $id}
+    ) {
       id
       publish
       title

@@ -1,0 +1,13 @@
+.blogs__tags {
+  @extend .font__body;
+  @extend .font-white;
+  width: 50%;
+  @include breakpoint(mobile) { width: 80%; }
+}
+
+.blogs__tag-item {
+  background-color: $color-elegant;
+  padding: em(3) em(10);
+  border-radius: 20px;
+  white-space:nowrap;
+}
