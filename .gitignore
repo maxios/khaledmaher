@@ -55,8 +55,8 @@ typings/
 .env*
 
 # gatsby files (commented cache and public to compare pages built with the new build)
-# .cache/
-# public
+.cache/
+public
 
 # Mac files
 .DS_Store
