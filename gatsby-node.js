@@ -44,12 +44,15 @@ exports.createPages = ({ actions, graphql }) => {
      }
      `).then(result => {
      // Create pages for each blog.
-     result.data.allMongodbKhaledmahercmsPosts.nodes.forEach(node => {
+     result.data.allMongodbKhaledmahercmsPosts.nodes.forEach((post, index, array) => {
+       console.log((array[index+1] || {}).title)
        createPage({
-         path: `/blog/${slugify(node.title)}`,
+         path: `/blog/${slugify(post.title)}`,
          component: path.resolve(`src/templates/post.js`),
          context: {
-           id: node.id
+           id: post.id,
+           next: (array[index+1] || {}).title,
+           prev: (array[index-1] || {}).title
          },
        })
      })

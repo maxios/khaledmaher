@@ -24,6 +24,8 @@
 .font__title--big {
   @extend .font__R-light;
   font-size: em(38);
+
+  @include breakpoint(mobile) { font-size: em(28) }
 }
 
 .font__title {

@@ -1,3 +1,24 @@
 .postTemplate__image {
   width: 100%;
 }
+
+.postTemplate__controls-container {
+  position: fixed;
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+}
+
+
+.postTemplate__controls-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  pointer-events: initial;
+  width: 50px;
+  min-height: 80px;
+  height: auto;
+  background-color: $color-elegant;
+  flex: 1;
+}

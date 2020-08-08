@@ -1,9 +1,9 @@
 import React from 'react';
 import PropType from 'prop-types';
 
-const SVG = ({ color, size, id }) => {
+const SVG = ({ color, size, id, inverse }) => {
   return (
-    <svg style={{width: size, height: size, fill: color}}>
+    <svg style={{width: size, height: size, fill: color, transform: inverse ? 'rotate(180deg)' : 'initial'}}>
       <use xlinkHref={`#${id}`} />
     </svg>
   )
@@ -11,13 +11,15 @@ const SVG = ({ color, size, id }) => {
 
 SVG.defaultProps = {
   size: 30,
-  color: ''
+  color: '',
+  inverse: false
 }
 
 SVG.propTypes = {
   id: PropType.any.isRequired,
   size: PropType.number,
-  color: PropType.string
+  color: PropType.string,
+  inverse: PropType.bool
 }
 
 export default SVG;

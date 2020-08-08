@@ -29,6 +29,7 @@ module.exports = {
     "gatsby-plugin-offline",
     "gatsby-plugin-svg-sprite",
     "gatsby-plugin-transition-link",
+    `gatsby-plugin-fontawesome-css`,
     "gatsby-plugin-sass",
     {
       resolve: `gatsby-source-mongodb`,
