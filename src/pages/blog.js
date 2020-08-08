@@ -48,6 +48,14 @@ export const query = graphql`
         publish
         hero {
           url
+          formats {
+            thumbnail {
+              url
+            }
+            medium {
+              url
+            }
+          }
         }
         tags
         title
