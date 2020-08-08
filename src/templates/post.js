@@ -1,5 +1,6 @@
 import React from 'react';
 import PropType from 'prop-types';
+import ProgressiveImage from "react-progressive-image-loading";
 import * as timeago from 'timeago.js';
 import Link from 'gatsby-plugin-transition-link';
 import Slugify from 'slugify';
@@ -16,7 +17,8 @@ const PostTemplate = ({ data, pageContext }) => {
   const post = data.mongodbKhaledmahercmsPosts;
   const next = pageContext.next;
   const prev = pageContext.prev;
-  const wordCount = post.content.split(" ").length
+  const wordCount = post.content.split(" ").length;
+  const heroThumbnailUrl = post.hero.formats.thumbnail.url;
   const heroUrl = process.env.NODE_ENV === 'production' ?
     post.hero.url :
     'https://www.designmantic.com/blog/wp-content/uploads/2016/07/social-media-cover-image-718x300.png'
@@ -51,7 +53,13 @@ const PostTemplate = ({ data, pageContext }) => {
 
       </div>
       <div className="mb-4 postTemplate__hero">
-        <img src={heroUrl} className="postTemplate__image"/>
+        <ProgressiveImage
+          preview={heroThumbnailUrl}
+          src={heroUrl}
+          transitionTime={500}
+          transitionFunction="ease"
+          render={(src, style) => <img src={src} style={style} className="postTemplate__image"/> }
+        />
         <br/>
         <span style={{float: 'right', right: 0}} className="font__body">{post.hero.caption}</span>
       </div>
@@ -95,6 +103,11 @@ export const query = graphql`
       hero {
         url
         caption
+        formats {
+          thumbnail {
+            url
+          }
+        }
       }
       tags
       content

@@ -8,6 +8,7 @@ import SVG from '@components/svg';
 import TwitterIcon from '@images/icons/twitter.svg';
 import LinkedinIcon from '@images/icons/linkedin.svg';
 import GithubIcon from '@images/icons/github.svg';
+import Image from '@images/photo.png';
 
 const IntroPage = () => {
   return (
@@ -20,7 +21,7 @@ const IntroPage = () => {
         <div className="intro__photo-container d-flex flex-column justify-content-center">
           {/* profile picture */}
           <div className="d-flex justify-content-center">
-            <Photo className="intro__photo"/>
+            <Photo image={Image} className="intro__photo"/>
           </div>
           {/* profile social */}
           <div className="mt-2 intro__social d-flex justify-content-center">

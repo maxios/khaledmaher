@@ -1,5 +1,4 @@
 import React from "react";
-import Link from 'gatsby-plugin-transition-link';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-svg-core/styles.css'
@@ -8,6 +7,7 @@ import { config, library } from '@fortawesome/fontawesome-svg-core'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import Photo from '@components/photo';
 import Layout from '@components/layout';
+import Image from '@images/photo.png';
 
 config.autoAddCss = false
 
@@ -20,7 +20,7 @@ const IndexPage = () => {
       <Layout>
         <div className="home__container">
           <div className="home__photo">
-            <Photo width={180}/>
+            <Photo image={Image} width={180}/>
           </div>
           <div className="home__greetings text-centered">
             <h1 className="greetings font-white text-centered"> Hi </h1>
