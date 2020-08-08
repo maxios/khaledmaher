@@ -58,10 +58,10 @@ const PostTemplate = ({ data, pageContext }) => {
           <h1 className="font__title--big mb-2">{post.title}</h1>
           <div>
             {timeago.format(post.createdAt)} &nbsp; &#8226; &nbsp;
-            <span className="font__body font-white blogs__tag-item">{Math.round(wordCount / 200, 2)} minutes read</span>&nbsp; &#8226; &nbsp;
+            <span className="font__body font-white blogs__tag-item">{Math.round(wordCount / 200, 2) || 'less than a '} minutes read</span>&nbsp; &#8226; &nbsp;
             {
               post.tags.map(tag => (
-                <Link key={tag} to={`/blog/tag/${tag}`}>
+                <Link className="mr-2 ml-2" key={tag} to={`/blog/tag/${tag}`}>
                   <span className="font__body font-white blogs__tag-item">{tag}</span>
                 </Link>
               ))
