@@ -52,6 +52,8 @@ const PostTemplate = ({ data, pageContext }) => {
       </div>
       <div className="mb-4 postTemplate__hero">
         <img src={heroUrl} className="postTemplate__image"/>
+        <br/>
+        <span style={{float: 'right', right: 0}} className="font__body">{post.hero.caption}</span>
       </div>
       <div className="container font__message postTemplate__container">
         <div className="postTemplate__title d-flex flex-column mb-5">
@@ -92,6 +94,7 @@ export const query = graphql`
       title
       hero {
         url
+        caption
       }
       tags
       content
