@@ -4,11 +4,11 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `Khaled Maher | Software Engineer`,
+    title: 'Khaled Maher | Software Engineer',
     description: `The Realm you want to know more about...`,
     author: `@maxios`,
     // Used for resolving images in social cards
-    siteUrl: `https://example.com`,
+    siteUrl: `https://khaledmaher.com`,
     // Used for social links in the root footer
     social: [
       {
@@ -70,8 +70,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Khaled Maher`,
+        short_name: `khaled`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,

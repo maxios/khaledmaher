@@ -24,7 +24,7 @@ const PostTemplate = ({ data, pageContext }) => {
     'https://www.designmantic.com/blog/wp-content/uploads/2016/07/social-media-cover-image-718x300.png'
 
   return (
-    <Layout seo={{title: post.title, description: post.content.substring(0, 200)}}>
+    <Layout seo={{title: post.title, description: post.content.substring(0, 200), image: post.hero.formats.medium.url}}>
       <div className="postTemplate__controls-container d-flex align-items-end align-items-md-center z-index-5 ">
         <div className="d-flex flex-row flex-md-column absolute left col-12 p-0">
           <Link className="postTemplate__controls-button order-2 order-md-1" to={`/blog`}>
@@ -105,6 +105,9 @@ export const query = graphql`
         caption
         formats {
           thumbnail {
+            url
+          }
+          medium {
             url
           }
         }
