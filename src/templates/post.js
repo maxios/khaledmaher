@@ -2,6 +2,7 @@ import React from 'react';
 import PropType from 'prop-types';
 import ProgressiveImage from "react-progressive-image-loading";
 import * as timeago from 'timeago.js';
+import AniLink from 'gatsby-plugin-transition-link/AniLink';
 import Link from 'gatsby-plugin-transition-link';
 import Slugify from 'slugify';
 import ReactMarkdown from 'react-markdown';
@@ -32,9 +33,9 @@ const PostTemplate = ({ data, pageContext }) => {
           </Link>
           {
             prev && (
-              <Link className="postTemplate__controls-button order-1 order-md-2" to={`/blog/${Slugify(prev)}`}>
+              <AniLink cover bg="#663399" direction="left" className="postTemplate__controls-button order-1 order-md-2" to={`/blog/${Slugify(prev)}`}>
                 <SVG id={ArrowIcon.id} size={50} color="white" inverse/>
-              </Link>
+              </AniLink>
             )
           }
           <Link className="postTemplate__controls-button order-3" to={`/blog`}>
@@ -43,9 +44,9 @@ const PostTemplate = ({ data, pageContext }) => {
 
           {
             next && (
-              <Link className="postTemplate__controls-button absolute-tablet right order-4" to={`/blog/${Slugify(next)}`}>
+              <AniLink cover bg="#663399" direction="right" className="postTemplate__controls-button absolute-tablet right order-4" to={`/blog/${Slugify(next)}`}>
                 <SVG id={ArrowIcon.id} size={50} color="white"/>
-              </Link>
+              </AniLink>
             )
           }
 

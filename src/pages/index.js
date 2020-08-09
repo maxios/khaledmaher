@@ -1,5 +1,5 @@
 import React from "react";
-import Link from 'gatsby-plugin-transition-link';
+import AniLink from 'gatsby-plugin-transition-link/AniLink';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-svg-core/styles.css'
@@ -33,7 +33,7 @@ const IndexPage = () => {
             <br/>
             <p className="p-4 font__message">
               {description}
-              <br/> happy to <Link className="font__link" to="/blog"> check my Blog </Link>
+              <br/> happy to <AniLink swipe direction="up" className="font__link" to="/blog"> check my Blog </AniLink>
             </p>
 
             <br/>

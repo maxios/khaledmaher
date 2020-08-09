@@ -1,7 +1,7 @@
 import React from 'react';
 import PropType from 'prop-types';
 import ProgressiveImage from "react-progressive-image-loading";
-import Link from 'gatsby-plugin-transition-link';
+import { Link } from 'gatsby';
 import Slugify from 'slugify';
 import * as timeago from 'timeago.js';
 
@@ -34,7 +34,7 @@ const PostItem = ({data}) => {
         </Link>
 
         <div className="font__message blogitem__text">
-          {data.content.substring(0, 500)}...
+          {data.content.substring(0, 300)}...
         </div>
       </div>
     </div>
