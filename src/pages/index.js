@@ -23,7 +23,7 @@ const IndexPage = () => {
 
   return (
     <div className="background font-white">
-      <Layout seo={{title: 'Khaled Maher | Software Engineer', description, image: Image}}>
+      <Layout bg="#272E40" seo={{title: 'Khaled Maher | Software Engineer', description, image: Image}}>
         <div className="home__container">
           <div className="home__photo">
             <Photo image={Image} width={180}/>
