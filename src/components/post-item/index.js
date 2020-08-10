@@ -16,7 +16,7 @@ const PostItem = ({data}) => {
       <div className="blogitem__hero mb-3">
         <Link to={`/blog/${Slugify(data.title)}`}>
           <ProgressiveImage
-            delay={500}
+            delay={80}
             src={heroUrl}
             placeholder={heroThumbnailUrl}
           >

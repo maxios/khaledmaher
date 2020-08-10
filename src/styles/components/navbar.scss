@@ -1,6 +1,10 @@
 .navbar__container {
-  margin: em(10) 0;
+  margin-bottom: em(50);
+  background-color: $color-primary;
+  display: inline-block;
 }
+
 .navbar__item {
   margin: 0 em(30);
+  padding: em(10) 0;
 }

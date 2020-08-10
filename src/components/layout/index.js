@@ -1,12 +1,14 @@
 import React from 'react';
 import PropType from 'prop-types';
 import { Helmet } from 'react-helmet';
+import NavBar from '@components/navbar';
 import Footer from '@components/footer';
 import SEO from "@components/seo"
 
 const Layout = props => {
   return (
     <div className="layout__container">
+      <NavBar/>
       <Helmet>
         <style>{`body { background-color: ${props.bg}; }`}</style>
       </Helmet>
