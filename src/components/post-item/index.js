@@ -1,6 +1,6 @@
 import React from 'react';
 import PropType from 'prop-types';
-import ProgressiveImage from "react-progressive-image-loading";
+import ProgressiveImage from "@components/progressive-image";
 import { Link } from 'gatsby';
 import Slugify from 'slugify';
 import * as timeago from 'timeago.js';

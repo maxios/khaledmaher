@@ -1,5 +1,5 @@
 import React from 'react';
-import ProgressiveImage from "react-progressive-image-loading";
+import ProgressiveImage from "@components/progressive-image";
 import PropType from 'prop-types';
 import classnames from 'classnames';
 
