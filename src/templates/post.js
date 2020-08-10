@@ -1,6 +1,6 @@
 import React from 'react';
 import PropType from 'prop-types';
-import ProgressiveImage from "@components/progressive-image";
+import ProgressiveImage from "react-progressive-graceful-image";
 import * as timeago from 'timeago.js';
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
 import Link from 'gatsby-plugin-transition-link';
