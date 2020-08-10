@@ -8,7 +8,7 @@ import SEO from "@components/seo"
 const Layout = props => {
   return (
     <div className="layout__container">
-      <NavBar/>
+      {!props.hideNavbar && <NavBar/> }
       <Helmet>
         <style>{`body { background-color: ${props.bg}; }`}</style>
       </Helmet>
@@ -22,12 +22,14 @@ const Layout = props => {
 }
 
 Layout.defaultProps = {
-  bg: 'white'
+  bg: 'white',
+  hideNavbar: false
 }
 
 Layout.propTypes = {
   seo: PropType.object.isRequired,
   bg: PropType.string,
+  hideNavbar: PropType.bool,
   children: PropType.any.isRequired
 }
 
