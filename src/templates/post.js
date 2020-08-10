@@ -55,12 +55,11 @@ const PostTemplate = ({ data, pageContext }) => {
       </div>
       <div className="mb-4 postTemplate__hero">
         <ProgressiveImage
-          preview={heroThumbnailUrl}
           src={heroUrl}
-          transitionTime={500}
-          transitionFunction="ease"
-          render={(src, style) => <img src={src} style={style} className="postTemplate__image"/> }
-        />
+          placeholder={heroThumbnailUrl}
+        >
+          {(src, loading) => <img style={{opacity: loading ? 0 : 1}} src={src} className="postTemplate__image"/> }
+        </ProgressiveImage>
         <br/>
         <span style={{float: 'right', right: 0}} className="font__body">{post.hero.caption}</span>
       </div>

@@ -27,13 +27,22 @@ const ProgressiveImage = props => {
     };
   }
 
-  useEffect(() => {
-    const {src, preview} = props;
-    const initialBlur = props.initialBlur;
-    setSrc(preview)
-    if (!is_cached(src)) setBlur(initialBlur);
+  const handleFetch = () => {
     fetch(src)
-      .then(srcDataURI => !unmounted && setSrc(srcDataURI) && setBlur(0));
+      .then(srcDataURI => {
+        console.log(srcDataURI)
+        return !unmounted && setSrc(srcDataURI) && setBlur(0)
+      });
+
+  }
+
+  useEffect(() => {
+    setSrc(props.preview)
+    if (!is_cached(props.src)) {
+      setBlur(props.initialBlur, handleFetch);
+    } else {
+      handleFetch();
+    }
 
     return () => {
       unmounted = true;

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropType from 'prop-types';
-import ProgressiveImage from "@components/progressive-image";
+import ProgressiveImage from "react-progressive-graceful-image";
 import { Link } from 'gatsby';
 import Slugify from 'slugify';
 import * as timeago from 'timeago.js';
@@ -16,12 +16,12 @@ const PostItem = ({data}) => {
       <div className="blogitem__hero mb-3">
         <Link to={`/blog/${Slugify(data.title)}`}>
           <ProgressiveImage
-            preview={heroThumbnailUrl}
+            delay={500}
             src={heroUrl}
-            transitionTime={500}
-            transitionFunction="ease"
-            render={(src, style) => <img src={src} style={style} className="blogitem__image" width={300} height={120}/> }
-          />
+            placeholder={heroThumbnailUrl}
+          >
+            {(src, loading) => <img style={{opacity: loading ? 0 : 1}}src={src} className="blogitem__image" width={300} height={120}/> }
+          </ProgressiveImage>
         </Link>
       </div>
       <div className="blogitem__content ml-0 ml-md-4">
