@@ -16,6 +16,11 @@ import { graphql } from 'gatsby'
 
 const PostTemplate = ({ data, pageContext }) => {
   const post = data.mongodbKhaledmahercmsPosts;
+  const seo = {
+    title: post.title,
+    description: post.content.substring(0, 200),
+    image: post.hero.formats.medium.url
+  }
   const next = pageContext.next;
   const prev = pageContext.prev;
   const wordCount = post.content.split(" ").length;
@@ -25,7 +30,7 @@ const PostTemplate = ({ data, pageContext }) => {
     'https://www.designmantic.com/blog/wp-content/uploads/2016/07/social-media-cover-image-718x300.png'
 
   return (
-    <Layout hideNavbar seo={{title: post.title, description: post.content.substring(0, 200), image: post.hero.formats.medium.url}}>
+    <Layout hideNavbar seo={seo}>
       <div className="postTemplate__controls-container d-flex align-items-end align-items-md-center z-index-5 ">
         <div className="d-flex flex-row flex-md-column absolute left col-12 p-0">
           <Link className="postTemplate__controls-button order-2 order-md-1" to={`/blog`}>
@@ -33,7 +38,12 @@ const PostTemplate = ({ data, pageContext }) => {
           </Link>
           {
             prev && (
-              <AniLink cover bg="#663399" direction="left" className="postTemplate__controls-button order-1 order-md-2" to={`/blog/${Slugify(prev)}`}>
+              <AniLink
+                cover bg="#663399"
+                direction="left"
+                className="postTemplate__controls-button order-1 order-md-2"
+                to={`/blog/${Slugify(prev)}`}
+              >
                 <SVG id={ArrowIcon.id} size={50} color="white" inverse/>
               </AniLink>
             )
@@ -44,7 +54,12 @@ const PostTemplate = ({ data, pageContext }) => {
 
           {
             next && (
-              <AniLink cover bg="#663399" direction="right" className="postTemplate__controls-button absolute-tablet right order-4" to={`/blog/${Slugify(next)}`}>
+              <AniLink
+                cover bg="#663399"
+                direction="right"
+                className="postTemplate__controls-button absolute-tablet right order-4"
+                to={`/blog/${Slugify(next)}`}
+              >
                 <SVG id={ArrowIcon.id} size={50} color="white"/>
               </AniLink>
             )
