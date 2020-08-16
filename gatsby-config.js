@@ -1,7 +1,6 @@
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
-
 module.exports = {
   siteMetadata: {
     title: 'Khaled Maher | Software Engineer',
@@ -78,9 +77,39 @@ module.exports = {
         display: `minimal-ui`
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-facebook-pixel`,
+      options: {
+        pixelId: '3323864117653285',
+      },
+    },
+    {
+      resolve: `gatsby-plugin-facebook-analytics`,
+      options: {
+        // Required - set this to the ID of your Facebook app.
+        appId: `3428771450523828`,
+
+        // Which version of the SDK to load.
+        version: `v8.0`,
+
+        // Determines whether XFBML tags used by social plugins are parsed.
+        xfbml: true,
+
+        // Determines whether a cookie is created for the session or not.
+        cookie: false,
+
+        // Include Facebook analytics in development.
+        // Defaults to false meaning the library will only be loaded in production.
+        includeInDevelopment: true,
+
+        // Include debug version of sdk
+        // Defaults to false meaning the library will load sdk.js
+        debug: false,
+
+        // Select your language.
+        language: `en_US`,
+      },
+    },
   ],
   mapping: {
     "mongodbKhaledmahercmsPosts.hero": "mongodbKhaledmahercmsUpload_file.mongodb_id"

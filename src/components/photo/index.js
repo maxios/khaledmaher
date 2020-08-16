@@ -14,7 +14,7 @@ const Photo = props => (
         width={props.width}
         className={classnames('photo', props.className)}
         style={{opacity: loading ? 0 : 1}}
-        alt="an image"
+        alt="photo image"
       />
     }
 

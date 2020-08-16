@@ -20,7 +20,7 @@ const PostItem = ({data}) => {
             src={heroUrl}
             placeholder={heroThumbnailUrl}
           >
-            {(src, loading) => <img style={{opacity: loading ? 0 : 1}}src={src} className="blogitem__image" width={300} height={120}/> }
+            {(src, loading) => <img alt={data.hero.caption} style={{opacity: loading ? 0 : 1}} src={src} className="blogitem__image" width={300} height={120}/> }
           </ProgressiveImage>
         </Link>
       </div>

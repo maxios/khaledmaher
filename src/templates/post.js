@@ -21,6 +21,7 @@ const PostTemplate = ({ data, pageContext }) => {
     description: post.content.substring(0, 200),
     image: post.hero.formats.medium.url
   }
+  console.log(pageContext);
   const next = pageContext.next;
   const prev = pageContext.prev;
   const wordCount = post.content.split(" ").length;
@@ -94,6 +95,13 @@ const PostTemplate = ({ data, pageContext }) => {
           </div>
         </div>
         <br/>
+        <div className="fb-share-button"
+          data-href="https://khaledmaher.com/blog"
+          data-size="large"
+          data-layout="button_count">
+        </div>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-size="large" data-via="animaxios" data-lang="en" data-show-count="true">Tweet</a>
+
         <ReactMarkdown source={post.content}/>
       </div>
     </Layout>
