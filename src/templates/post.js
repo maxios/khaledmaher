@@ -14,6 +14,8 @@ import SVG from '@components/svg';
 
 import { graphql } from 'gatsby'
 
+import { ShareLink } from 'social-media-sharing'
+
 const PostTemplate = ({ data, pageContext }) => {
   const post = data.mongodbKhaledmahercmsPosts;
   const seo = {
@@ -22,6 +24,15 @@ const PostTemplate = ({ data, pageContext }) => {
     image: post.hero.formats.medium.url
   }
   console.log(pageContext);
+
+  const socialMediaLinks = new ShareLink('facebook');
+
+  socialMediaLinks.get({u: window.location.href});
+
+  const handleFBShare = () => {
+    socialMediaLinks.open();
+  }
+
   const next = pageContext.next;
   const prev = pageContext.prev;
   const wordCount = post.content.split(" ").length;
@@ -95,11 +106,7 @@ const PostTemplate = ({ data, pageContext }) => {
           </div>
         </div>
         <br/>
-        <div className="fb-share-button"
-          data-href="https://khaledmaher.com/blog"
-          data-size="large"
-          data-layout="button_count">
-        </div>
+        <button onClick={handleFBShare}>facebook share</button>
         <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-size="large" data-via="animaxios" data-lang="en" data-show-count="true">Tweet</a>
 
         <ReactMarkdown source={post.content}/>

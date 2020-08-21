@@ -100,7 +100,7 @@ module.exports = {
 
         // Include Facebook analytics in development.
         // Defaults to false meaning the library will only be loaded in production.
-        includeInDevelopment: true,
+        includeInDevelopment: false,
 
         // Include debug version of sdk
         // Defaults to false meaning the library will load sdk.js
@@ -109,7 +109,7 @@ module.exports = {
         // Select your language.
         language: `en_US`,
       },
-    },
+    }
   ],
   mapping: {
     "mongodbKhaledmahercmsPosts.hero": "mongodbKhaledmahercmsUpload_file.mongodb_id"
