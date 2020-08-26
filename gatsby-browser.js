@@ -19,6 +19,10 @@ exports.onInitialClientRender = () => {
   //   'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0',
   //   'facebook-jssdk'
   // )
+  // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+  let vh = window.innerHeight * 0.01;
+  // Then we set the value in the --vh custom property to the root of the document
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
 
   createScript(
     'https://platform.twitter.com/widgets.js',

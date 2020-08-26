@@ -11,6 +11,7 @@ const Layout = props => {
       {!props.hideNavbar && <NavBar/> }
       <Helmet>
         <style>{`body { background-color: ${props.bg}; }`}</style>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
       </Helmet>
       <SEO {...props.seo} />
       {props.children}
