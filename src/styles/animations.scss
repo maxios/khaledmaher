@@ -1,0 +1,5 @@
+.transition-ease-out {
+  -webkit-transition: all 0.2s cubic-bezier(.46, 0, .18, 1);
+  -moz-transition: all 0.2s cubic-bezier(.46, 0, .18, 1);
+  transition: all 0.2s cubic-bezier(.46, 0, .18, 1);
+}

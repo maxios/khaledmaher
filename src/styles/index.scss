@@ -53,15 +53,19 @@ $browser-context: 16;
 @import 'variables.scss';
 @import 'typography.scss';
 @import 'alignments.scss';
+@import 'animations';
+@import 'colors.scss';
 
 @import 'pages/home.scss';
 @import 'pages/intro.scss';
 @import 'pages/blog.scss';
 
 // components
+@import 'templates/post.scss';
 @import 'components/photo.scss';
 @import 'components/footer.scss';
 @import 'components/layout.scss';
 @import 'components/navbar.scss';
 @import 'components/post-item.scss';
-@import 'templates/post.scss';
+@import 'components/blog-controls.scss';
+@import 'components/sharer.scss';

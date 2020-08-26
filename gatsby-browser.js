@@ -6,12 +6,11 @@
 
 // You can delete this file if you're not using it
 
-const createScript = (src, id, options) => {
+const createScript = (src, id) => {
     var js, fjs = document.getElementsByTagName('script')[0];
     if (document.getElementById(id)) return;
     js = document.createElement('script'); js.id = id;
     js.src = src;
-    Object.entries(options).forEach(([key, value]) => js[key] = value)
     fjs.parentNode.insertBefore(js, fjs);
 }
 

@@ -58,6 +58,7 @@ module.exports = {
           "@constants": "src/constants",
           "@layouts": "src/layouts",
           "@pages": "src/pages",
+          "@utils": "src/utils",
           "@images": "src/images",
           "@styles": "src/styles"
         },

@@ -36,3 +36,14 @@ ul {
 img {
   transition: 0.5s opacity ease-in;
 }
+
+button, button:focus {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  outline: 0
+}
+
+.dimmed {
+  background-color: grey !important;
+}

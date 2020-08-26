@@ -1,0 +1,20 @@
+.sharer__container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content:: center;
+  align-items: center;
+}
+
+.sharer__window {
+  display: flex;
+  justify-content: center;
+  z-index: 3
+}
+
+.sharer__button, .sharer__button:focus {
+  padding: 20px;
+  cursor: pointer;
+}
