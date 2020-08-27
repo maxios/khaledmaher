@@ -8,7 +8,7 @@ import ShareIcon from '@images/icons/share.svg';
 import ListIcon from '@images/icons/list.svg';
 import SVG from '@components/svg';
 import Sharer from '@components/sharer';
-
+import Div100vh from 'react-div-100vh'
 
 const BlogControls = ({ pageContext, location }) => {
   const [shareOpened, setShareOpened] = useState(false);
@@ -19,7 +19,7 @@ const BlogControls = ({ pageContext, location }) => {
   const closeSharers = () => setShareOpened(false);
 
   return (
-    <>
+    <Div100vh style={{position: 'absolute'}}>
       <Sharer
         location={location}
         isOpened={shareOpened}
@@ -75,7 +75,7 @@ const BlogControls = ({ pageContext, location }) => {
 
         </div>
       </div>
-    </>
+    </Div100vh>
   )
 }
 

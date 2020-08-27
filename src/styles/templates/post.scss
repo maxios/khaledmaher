@@ -3,10 +3,11 @@
 }
 
 .postTemplate__controls-container {
-  position: fixed;
+  position: absolute;
   pointer-events: none;
   width: 100vw;
-  height: 100vh;
+  bottom: 0;
+  top: 0;
 }
 
 
