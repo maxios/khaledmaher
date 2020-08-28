@@ -4,8 +4,23 @@ body {
   margin: 0;
 }
 ::-webkit-scrollbar {
-    width: 0px;  /* Remove scrollbar space */
-    background: transparent;  /* Optional: just make scrollbar invisible */
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+p::selection {
+  background-color: $color-theme;
+  color: white;
+}
+
+p::-moz-selection {
+  background-color: $color-theme;
+  color: white;
+}
+
+p::-webkit-selection {
+  background-color: $color-theme;
+  color: white;
 }
 
 h1{
@@ -24,7 +39,7 @@ a, a:hover {
   color: inherit;
 }
 a[href], input[type='submit'], input[type='image'], label[for], select, button, .pointer {
-       cursor: pointer;
+  cursor: pointer;
 }
 
 ul {

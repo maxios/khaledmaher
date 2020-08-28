@@ -49,8 +49,8 @@ $browser-context: 16;
 @include font('RobotoCondensed-Regular', '../statics/fonts/RobotoCondensed-Regular');
 
 @import 'breakpoints.scss';
-@import 'common.scss';
 @import 'variables.scss';
+@import 'common.scss';
 @import 'typography.scss';
 @import 'alignments.scss';
 @import 'animations';
