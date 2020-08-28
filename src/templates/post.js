@@ -23,6 +23,9 @@ const PostTemplate = ({ data, pageContext, location }) => {
     post.hero.url :
     'https://www.designmantic.com/blog/wp-content/uploads/2016/07/social-media-cover-image-718x300.png'
 
+  const isArabic = pageContext.isArabic;
+  const textAlign = isArabic ? 'right' : 'left';
+
   return (
     <Layout hideNavbar seo={seo}>
       <BlogControls pageContext={pageContext} location={location}/>
@@ -37,7 +40,7 @@ const PostTemplate = ({ data, pageContext, location }) => {
         <span style={{float: 'right', right: 0}} className="font__body">{post.hero.caption}</span>
       </div>
       <div className="container font__message postTemplate__container">
-        <div className="postTemplate__title d-flex flex-column mb-5">
+        <div className="postTemplate__title d-flex flex-column mb-5" style={{textAlign}}>
           <h1 className="font__title--big mb-2">{post.title}</h1>
           <div>
             {timeago.format(post.createdAt)} &nbsp; &#8226; &nbsp;
@@ -53,7 +56,9 @@ const PostTemplate = ({ data, pageContext, location }) => {
         </div>
         <br/>
 
-        <ReactMarkdown source={post.content}/>
+        <div dir={isArabic ? 'rtl' : 'ltr'} style={{textAlign}}>
+          <ReactMarkdown source={post.content}/>
+        </div>
       </div>
     </Layout>
   )

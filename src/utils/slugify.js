@@ -8,11 +8,11 @@
  *   ['–', '—', '―', '~', '\\', '/', '|', '+', '\'', '‘', '’', ' ']
  */
 if (!String.prototype.slugify) {
-    String.prototype.slugify = function (delimiter, separators) {
+    String.prototype.slugify = function (delimiterProp, separators) {
         var i = separators && separators.length,
             slug = this,
-            delimiter = delimiter || '-',
-            regexEscape = new RegExp(/[[\/\\^$*+?.()|{}\]]/g),
+            delimiter = delimiterProp || '-',
+            regexEscape = new RegExp(/[[/\\^$*+?.()|{}\]]/g),
             regexDelimiter = delimiter.replace(regexEscape, "\\$&"),
             prohibited = new RegExp("([^a-z0-9" + regexDelimiter + "])", "g"),
             consecutive = new RegExp("(" + regexDelimiter + "+)", "g"),

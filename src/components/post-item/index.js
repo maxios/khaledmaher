@@ -2,7 +2,6 @@ import React from 'react';
 import PropType from 'prop-types';
 import ProgressiveImage from "react-progressive-graceful-image";
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
-import Slugify from 'slugify';
 import * as timeago from 'timeago.js';
 
 const PostItem = ({data}) => {
@@ -14,7 +13,7 @@ const PostItem = ({data}) => {
   return (
     <div className="conatiner blogitem__container mb-4 d-flex flex-column flex-md-row">
       <div className="blogitem__hero mb-3">
-        <AniLink fade duration={0.2} to={`/blog/${Slugify(data.title)}`}>
+        <AniLink fade duration={0.2} to={`/blog/${data.title.slugify('-')}`}>
           <ProgressiveImage
             delay={80}
             src={heroUrl}
@@ -25,7 +24,7 @@ const PostItem = ({data}) => {
         </AniLink>
       </div>
       <div className="blogitem__content ml-0 ml-md-4">
-        <AniLink fade duration={0.2} to={`/blog/${Slugify(data.title)}`}>
+        <AniLink fade duration={0.2} to={`/blog/${data.title.slugify('-')}`}>
           <div className="blogitem__title mb-3 ">
             <h2 className="font__title">{data.title}</h2>
             <br/>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropType from 'prop-types';
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
-import Slugify from 'slugify';
 import ArrowIcon from '@images/icons/arrow.svg';
 import ShareIcon from '@images/icons/share.svg';
 import ListIcon from '@images/icons/list.svg';
@@ -38,7 +37,7 @@ const BlogControls = ({ pageContext, location }) => {
                 direction="left"
                 duration={0.5}
                 className="postTemplate__controls-button order-1 order-md-2"
-                to={`/blog/${Slugify(prev)}`}
+                to={`/blog/${prev.slugify('-')}`}
               >
                 <SVG id={ArrowIcon.id} size={50} color="white" inverse/>
               </AniLink>
@@ -63,7 +62,7 @@ const BlogControls = ({ pageContext, location }) => {
                 direction="right"
                 duration={0.5}
                 className="postTemplate__controls-button absolute-tablet right order-4"
-                to={`/blog/${Slugify(next)}`}
+                to={`/blog/${next.slugify('-')}`}
               >
                 <SVG id={ArrowIcon.id} size={50} color="white"/>
               </AniLink>

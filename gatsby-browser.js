@@ -6,6 +6,8 @@
 
 // You can delete this file if you're not using it
 
+require('./src/utils/slugify.js');
+
 const createScript = (src, id) => {
     var js, fjs = document.getElementsByTagName('script')[0];
     if (document.getElementById(id)) return;
@@ -17,7 +19,6 @@ const createScript = (src, id) => {
 exports.onClientEntry = () => {
   // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
   let vh = window.innerHeight * 0.01;
-  console.log('hello');
   // Then we set the value in the --vh custom property to the root of the document
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 }
@@ -28,7 +29,6 @@ exports.onInitialClientRender = () => {
   //   'facebook-jssdk'
   // )
 
-  console.log('hello client loaded');
   createScript(
     'https://platform.twitter.com/widgets.js',
     'twitter-jssdk'

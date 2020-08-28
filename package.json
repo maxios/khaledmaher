@@ -44,7 +44,6 @@
     "react-progressive-graceful-image": "^0.6.12",
     "react-progressive-image-loading": "^3.0.3",
     "react-router-dom": "^5.2.0",
-    "slugify": "^1.4.5",
     "social-media-sharing": "github:maxios/social-media-share",
     "timeago.js": "^4.0.2"
   },
