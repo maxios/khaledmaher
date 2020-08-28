@@ -1,7 +1,12 @@
 .navbar__container {
   margin-bottom: em(50);
-  background-color: $color-primary;
-  display: inline-block;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar__list {
+
 }
 
 .navbar__item {

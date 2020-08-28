@@ -12,7 +12,7 @@ const Layout = props => {
       <div className="layout__container">
         {!props.hideNavbar && <NavBar/> }
         <Helmet>
-          <style>{`body { background-color: ${props.bg}; }`}</style>
+          <style>{`body { ${props.bg === 'primary' ? 'background-color: #272E40; color: white;' : 'background-color: white; color: #272E40'}; }`}</style>
           <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         </Helmet>
         <SEO {...props.seo} />
