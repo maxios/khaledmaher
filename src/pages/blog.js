@@ -17,7 +17,7 @@ const BlogPage = ({data}) => {
               <br/>
               <div className="blogs__tags mt-3 mb-3 d-flex flex-wrap justify-content-center">
                 {data.allMongodbKhaledmahercmsTags.nodes.map(node => (
-                  <AniLink fade duration={0.2} key={node.id} to={`/blog/tag/${node.name}`}>
+                  <AniLink fade duration={0.2} key={node.id} to={`/blog/tag/${node.name.toLowerCase()}`}>
                     <div className="blogs__tag-item mr-2 ml-2 mb-2"># {node.name}</div>
                   </AniLink>
                 ))}
