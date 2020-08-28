@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropType from 'prop-types';
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
-import Link from 'gatsby-plugin-transition-link';
 import Slugify from 'slugify';
 import ArrowIcon from '@images/icons/arrow.svg';
 import ShareIcon from '@images/icons/share.svg';
@@ -29,9 +28,9 @@ const BlogControls = ({ pageContext, location }) => {
         className="postTemplate__controls-container d-flex align-items-end align-items-md-center z-index-5 "
       >
         <div className="d-flex flex-row flex-md-column justify-content-center absolute left col-12 p-0">
-          <Link className="postTemplate__controls-button order-2 order-md-1" to={`/blog`}>
+          <AniLink fade duration={0.2} className="postTemplate__controls-button order-2 order-md-1" to={`/blog`}>
             <SVG id={ListIcon.id} size={50} color="white"/>
-          </Link>
+          </AniLink>
           {
             prev ? (
               <AniLink

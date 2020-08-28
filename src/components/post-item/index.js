@@ -1,7 +1,7 @@
 import React from 'react';
 import PropType from 'prop-types';
 import ProgressiveImage from "react-progressive-graceful-image";
-import { Link } from 'gatsby';
+import AniLink from 'gatsby-plugin-transition-link/AniLink';
 import Slugify from 'slugify';
 import * as timeago from 'timeago.js';
 
@@ -14,7 +14,7 @@ const PostItem = ({data}) => {
   return (
     <div className="conatiner blogitem__container mb-4 d-flex flex-column flex-md-row">
       <div className="blogitem__hero mb-3">
-        <Link to={`/blog/${Slugify(data.title)}`}>
+        <AniLink fade duration={0.2} to={`/blog/${Slugify(data.title)}`}>
           <ProgressiveImage
             delay={80}
             src={heroUrl}
@@ -22,16 +22,16 @@ const PostItem = ({data}) => {
           >
             {(src, loading) => <img alt={data.hero.caption} style={{opacity: loading ? 0 : 1}} src={src} className="blogitem__image" width={300} height={120}/> }
           </ProgressiveImage>
-        </Link>
+        </AniLink>
       </div>
       <div className="blogitem__content ml-0 ml-md-4">
-        <Link to={`/blog/${Slugify(data.title)}`}>
+        <AniLink fade duration={0.2} to={`/blog/${Slugify(data.title)}`}>
           <div className="blogitem__title mb-3 ">
             <h2 className="font__title">{data.title}</h2>
             <br/>
             <span className="font__body"> {timeago.format(data.createdAt)} </span>
           </div>
-        </Link>
+        </AniLink>
 
         <div className="font__message blogitem__text">
           {data.content.substring(0, 300)}...

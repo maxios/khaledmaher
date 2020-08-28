@@ -1,7 +1,9 @@
 .blogitem__container {
   min-height: em(250);
 }
-.blogitem__hero {}
+.blogitem__hero {
+  min-height: 137px;
+}
 .blogitem__image {
   object-fit: cover;
   @include for-tablet-portrait-down { width: 100%; height: 100%}
