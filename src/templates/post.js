@@ -2,7 +2,7 @@ import React from 'react';
 import PropType from 'prop-types';
 import ProgressiveImage from "react-progressive-graceful-image";
 import * as timeago from 'timeago.js';
-import Link from 'gatsby-plugin-transition-link';
+import AniLink from 'gatsby-plugin-transition-link/AniLink';
 import ReactMarkdown from 'react-markdown';
 import Layout from '@components/layout';
 import BlogControls from '@components/blog-controls';
@@ -44,9 +44,9 @@ const PostTemplate = ({ data, pageContext, location }) => {
             <span className="font__body font-white blogs__tag-item">{Math.round(wordCount / 200, 2) || 'less than a '} minutes read</span>&nbsp; &#8226; &nbsp;
             {
               post.tags.map(tag => (
-                <Link className="mr-2 ml-2" key={tag} to={`/blog/tag/${tag}`}>
+                <AniLink fade duration={0.2} className="mr-2 ml-2" key={tag} to={`/blog/tag/${tag}`}>
                   <span className="font__body font-white blogs__tag-item">{tag}</span>
-                </Link>
+                </AniLink>
               ))
             }
           </div>
