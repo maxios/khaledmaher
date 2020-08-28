@@ -17,7 +17,7 @@ library.add(faBars);
 const IndexPage = () => {
 
   const description = `
-  Dedicated Software Engineer experienced in crafting software products using various stacks alongside with AWS Services.
+  Dedicated Software Engineer experienced in crafting software products using various stacks alongside AWS Services.
   I assure the best performance, Code Readability, and fast delivery.
   `
 
