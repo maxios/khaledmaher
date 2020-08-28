@@ -7,6 +7,7 @@ import ListIcon from '@images/icons/list.svg';
 import SVG from '@components/svg';
 import Sharer from '@components/sharer';
 import Div100vh from 'react-div-100vh'
+import '@utils/slugify.js';
 
 const BlogControls = ({ pageContext, location }) => {
   const [shareOpened, setShareOpened] = useState(false);

@@ -3,6 +3,7 @@ import PropType from 'prop-types';
 import ProgressiveImage from "react-progressive-graceful-image";
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
 import * as timeago from 'timeago.js';
+import '@utils/slugify.js';
 
 const PostItem = ({data}) => {
   const heroThumbnailUrl = data.hero.formats.thumbnail.url;

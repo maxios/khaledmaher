@@ -6,8 +6,6 @@
 
 // You can delete this file if you're not using it
 
-require('./src/utils/slugify.js');
-
 const createScript = (src, id) => {
     var js, fjs = document.getElementsByTagName('script')[0];
     if (document.getElementById(id)) return;
