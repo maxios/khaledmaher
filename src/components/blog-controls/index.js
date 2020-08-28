@@ -36,6 +36,7 @@ const BlogControls = ({ pageContext, location }) => {
               <AniLink
                 cover bg="#663399"
                 direction="left"
+                duration={0.5}
                 className="postTemplate__controls-button order-1 order-md-2"
                 to={`/blog/${Slugify(prev)}`}
               >
@@ -60,6 +61,7 @@ const BlogControls = ({ pageContext, location }) => {
               <AniLink
                 cover bg="#663399"
                 direction="right"
+                duration={0.5}
                 className="postTemplate__controls-button absolute-tablet right order-4"
                 to={`/blog/${Slugify(next)}`}
               >
