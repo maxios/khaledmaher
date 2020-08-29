@@ -7,7 +7,10 @@ import Layout from '@components/layout';
 
 const BlogPage = ({data}) => {
   return (
-    <Layout bg="white" seo={{title: 'Khaled Maher | Blog', description: 'thoughts made for love', image: 'https://scontent.fcai20-1.fna.fbcdn.net/v/t1.0-9/103481744_1587539261396427_7896338582725589395_n.jpg'}}>
+    <Layout
+      bg="white"
+      seo={{title: 'Khaled Maher | Blog', description: 'Thoughts made for love', image: 'https://scontent.fcai20-1.fna.fbcdn.net/v/t1.0-9/103481744_1587539261396427_7896338582725589395_n.jpg'}}
+    >
      <div className="container">
           <>
             <div className="blogs__header d-flex flex-column align-items-center text-centered">

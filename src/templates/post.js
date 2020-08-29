@@ -17,14 +17,13 @@ const PostTemplate = ({ data, pageContext, location }) => {
     image: post.hero.formats.medium.url
   }
 
+  const isArabic = pageContext.isArabic;
+  const textAlign = isArabic ? 'right' : 'left';
   const wordCount = post.content.split(" ").length;
   const heroThumbnailUrl = post.hero.formats.thumbnail.url;
   const heroUrl = process.env.NODE_ENV === 'production' ?
     post.hero.url :
     'https://www.designmantic.com/blog/wp-content/uploads/2016/07/social-media-cover-image-718x300.png'
-
-  const isArabic = pageContext.isArabic;
-  const textAlign = isArabic ? 'right' : 'left';
 
   return (
     <Layout hideNavbar seo={seo}>
@@ -37,7 +36,9 @@ const PostTemplate = ({ data, pageContext, location }) => {
           {(src, loading) => <img style={{opacity: loading ? 0 : 1}} src={src} className="postTemplate__image"/> }
         </ProgressiveImage>
         <br/>
-        <span style={{float: 'right', right: 0}} className="font__body">{post.hero.caption}</span>
+        <span className="font__body right float-right">
+          {post.hero.caption}
+        </span>
       </div>
       <div className="container font__message postTemplate__container">
         <div className="postTemplate__title d-flex flex-column mb-5" style={{textAlign}}>
@@ -47,7 +48,7 @@ const PostTemplate = ({ data, pageContext, location }) => {
             <span className="font__body font-white blogs__tag-item">{Math.round(wordCount / 200, 2) || 'less than a '} minutes read</span>&nbsp; &#8226; &nbsp;
             {
               post.tags.map(tag => (
-                <AniLink fade duration={0.2} className="mr-2 ml-2" key={tag} to={`/blog/tag/${tag}`}>
+                <AniLink fade duration={0.2} className="mr-2 ml-2" key={tag} to={`/blog/tag/${tag.toLowerCase()}`}>
                   <span className="font__body font-white blogs__tag-item">{tag}</span>
                 </AniLink>
               ))
