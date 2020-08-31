@@ -3,9 +3,9 @@ import PropType from 'prop-types';
 import ProgressiveImage from "react-progressive-graceful-image";
 import * as timeago from 'timeago.js';
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
-import ReactMarkdown from 'react-markdown';
 import Layout from '@components/layout';
 import BlogControls from '@components/blog-controls';
+import Markdown from '@components/markdown';
 
 import { graphql } from 'gatsby'
 
@@ -58,8 +58,9 @@ const PostTemplate = ({ data, pageContext, location }) => {
         <br/>
 
         <div dir={isArabic ? 'rtl' : 'ltr'} style={{textAlign}}>
-          <ReactMarkdown source={post.content}/>
+          <Markdown body={post.content}/>
         </div>
+        <br/>
       </div>
     </Layout>
   )

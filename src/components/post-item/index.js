@@ -32,7 +32,6 @@ const PostItem = ({data}) => {
             <span className="font__body"> {timeago.format(data.createdAt)} </span>
           </div>
         </AniLink>
-
         <div className="font__message blogitem__text">
           {data.content.substring(0, 300)}...
         </div>
