@@ -43,7 +43,7 @@ BlogPage.propTypes = {
 
 export const query = graphql`
   query Blog($tag: [String]) {
-    allMongodbKhaledmahercmsPosts(filter: {tags: {in: $tag}}) {
+    allMongodbKhaledmahercmsPosts(filter: {tags: {in: $tag}, publish: {eq: true}}) {
       nodes {
         id
         createdAt

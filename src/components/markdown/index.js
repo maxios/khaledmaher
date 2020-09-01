@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import PropType from 'prop-types';
 import ReactDOM from 'react-dom';
 import Typeform from '@components/typeform';
@@ -13,25 +13,30 @@ import ReactMarkdown from 'react-markdown';
 const components = (name, props) => {
   return {
     typeform: <Typeform {...props}></Typeform>
-  }[name] || <div/>
+  }[name] || <span/>
 }
 
 const Markdown = props => {
   const { body, ...restProps } = props;
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    var e = document.getElementById('react-markdown');
+    const nodes = containerRef.current.querySelectorAll('[data-id="react"]');
 
-    if(!e) return;
+    if(!nodes.length) return;
 
-    const props = JSON.parse(e.dataset.props);
-    const div = document.createElement('div');
-    ReactDOM.render(components(e.dataset.component, props), div)
-    e.parentNode.replaceChild( div, e);
+    nodes.forEach(node => {
+      const props = JSON.parse(node.dataset.props);
+      const div = document.createElement('div');
+      ReactDOM.render(components(node.dataset.component, props), div)
+      node.parentNode.replaceChild(div, node);
+    })
   }, [])
 
   return (
-    <ReactMarkdown escapeHtml={false} source={body} {...restProps}/>
+    <div ref={containerRef} className="markdown__container">
+      <ReactMarkdown escapeHtml={false} source={body} {...restProps}/>
+    </div>
   )
 }
 
