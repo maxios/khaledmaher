@@ -7,6 +7,10 @@
   position: absolute;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute-mobile {
   @include breakpoint(mobile) { position: absolute; }
 }

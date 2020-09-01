@@ -10,18 +10,14 @@ const Typeform = props => {
     paddingTop: 5
   }
   useEffect(() => {
-    const existingScript = document.getElementById('googleMaps');
-
-    if (!existingScript) {
-      const script = document.createElement('script');
-      script.src = 'https://embed.typeform.com/embed.js';
-      script.id = 'typef_orm';
-      document.body.appendChild(script);
-
-      script.onload = () => {
-        if (props.callback) props.callback();
-      };
-    }
+    fetch('https://embed.typeform.com/embed.js')
+      .then(response => {
+        console.log(response);
+        response.text()
+      })
+      .then(Function)
+      .then(() => props.callback && props.callback())
+      .catch(console.log)
   }, [])
 
   return (
