@@ -64,7 +64,7 @@
   "license": "MIT",
   "scripts": {
     "source-env": "env ./.env",
-    "build": "gatsby build --log-pages",
+    "build": "NODE_ENV=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD) gatsby build --log-pages",
     "develop": "gatsby develop",
     "deploy": "gatsby-plugin-s3 deploy",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",

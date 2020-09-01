@@ -8,7 +8,7 @@ body {
   background: transparent;  /* Optional: just make scrollbar invisible */
 }
 
-p::selection {
+::selection {
   background-color: $color-theme;
   color: white;
 }

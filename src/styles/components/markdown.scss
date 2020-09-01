@@ -1,0 +1,23 @@
+.markdown__container blockquote {
+  background-color: $color-theme;
+  color: white;
+  padding: 20px 30px;
+  margin: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+
+  @include breakpoint(mobile) { width: 100%; }
+}
+
+.markdown__container img {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  width: fit-content;
+  max-width: 100%;
+}
+
+
