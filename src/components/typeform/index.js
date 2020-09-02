@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import PropType from 'prop-types';
 
 const Typeform = props => {

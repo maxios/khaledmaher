@@ -5,6 +5,7 @@ import FacebookIcon from '@images/icons/facebook.svg';
 import TwitterIcon from '@images/icons/twitter.svg';
 import LinkedinIcon from '@images/icons/linkedin.svg';
 import SVG from '@components/svg';
+import Modal from '@components/modal';
 
 
 const Sharer = props => {
@@ -37,17 +38,7 @@ const Sharer = props => {
   ]
 
   return (
-    <div
-      className="sharer__container absolute transition-ease-out full-screen"
-      onClick={props.close}
-      style={props.isOpened ? {
-        opacity: 1,
-        pointerEvents: 'initial'
-      } : {
-        opacity: 0,
-        pointerEvents: 'none'
-      }}
-    >
+    <Modal close={props.close} isOpened={props.isOpened}>
       <div
         className="sharer__window shadow-frame transition-ease-out absolute d-flex z-index-1"
         style={{
@@ -65,7 +56,7 @@ const Sharer = props => {
           ))
         }
       </div>
-    </div>
+    </Modal>
   )
 }
 
