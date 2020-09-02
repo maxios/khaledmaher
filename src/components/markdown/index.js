@@ -3,6 +3,7 @@ import PropType from 'prop-types';
 import ReactDOM from 'react-dom';
 import Typeform from '@components/typeform';
 import ReactMarkdown from 'react-markdown';
+import ImageRenderer from './renderers/image.js';
 
 // matches strings like
 // <a id="react-markdown" data-component='typeform' data-props='{"key": "value"}' >     </div>
@@ -35,7 +36,11 @@ const Markdown = props => {
 
   return (
     <div ref={containerRef} className="markdown__container">
-      <ReactMarkdown escapeHtml={false} source={body} {...restProps}/>
+      <ReactMarkdown
+        escapeHtml={false}
+        source={body} {...restProps}
+        renderers={{image: ImageRenderer}}
+      />
     </div>
   )
 }
