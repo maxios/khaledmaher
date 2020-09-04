@@ -25,8 +25,8 @@ class Question extends React.Component {
       <InlineModal toggle={this.state.isModalOpened} onOpen={this.onOpen.bind(this)}>
         <div className="question__container">
           <div className="question__group">
-            <p className="question__text">{this.props.text}</p>
-            <input ref={this.inputRef} className="question__input"/>
+            <label htmlFor="question" className="question__text">{this.props.text}</label>
+            <input id="question" ref={this.inputRef} className="question__input"/>
           </div>
           <button onClick={this.close.bind(this)}>{this.props.buttonText}</button>
         </div>

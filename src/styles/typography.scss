@@ -43,7 +43,7 @@
   @extend .font__R-light;
   font-size: em(18);
 
-  @include breakpoint(mobile) { font-size: em(12) }
+  @include breakpoint(mobile) { font-size: em(14) }
 }
 
 

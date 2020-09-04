@@ -4,7 +4,11 @@
   flex-direction: column;
   @include flex-center
 
-  margin: 20px 0;
+  margin: em(20) 0;
+  padding: em(20);
+
+  background-color: $color-primary;
+  color: white;
 
   overflow: hidden;
 }
@@ -22,7 +26,9 @@
   border: 0;
   padding: 0;
   outline: 0;
+  display: block;
   background: transparent;
+  color: white;
   width: 100%;
 }
 

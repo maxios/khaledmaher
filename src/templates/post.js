@@ -45,7 +45,7 @@ const PostTemplate = ({ data, pageContext, location }) => {
           <h1 className="font__title--big mb-2">{post.title}</h1>
           <div>
             {timeago.format(post.createdAt)} &nbsp; &#8226; &nbsp;
-            <span className="font__body font-white blogs__tag-item">{Math.round(wordCount / 200, 2) || 'less than a '} minutes read</span>&nbsp; &#8226; &nbsp;
+            <span className="font__body font-white blogs__tag-item">{Math.round(wordCount / 200, 2) || 'less than a '} minutes read</span>
             {
               post.tags.map(tag => (
                 <AniLink fade duration={0.2} className="mr-2 ml-2" key={tag} to={`/blog/tag/${tag.toLowerCase()}`}>

@@ -52,7 +52,7 @@ class InlineModal extends React.Component {
       <div
         ref={this.containerRef}
         className="inline-modal__container transition-ease-out-half"
-        style={{height: this.state.isOpened ? this.props.height : 0}}
+        style={{maxHeight: this.state.isOpened ? this.props.height : 0}}
       >
         {this.props.children}
       </div>
@@ -64,7 +64,7 @@ InlineModal.defaultProps = {
   opened: false,
   onOpen: () => {},
   toggle: () => {},
-  height: 200,
+  height: 600,
   throttle: 500
 }
 
