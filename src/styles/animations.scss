@@ -1,5 +1,13 @@
+@mixin transition($prop, $time, $cubic) {
+  -webkit-transition: $prop $time $cubic;
+  -moz-transition: $prop $time $cubic;
+  transition: $prop $time $cubic;
+}
+
 .transition-ease-out {
-  -webkit-transition: all 0.2s cubic-bezier(.46, 0, .18, 1);
-  -moz-transition: all 0.2s cubic-bezier(.46, 0, .18, 1);
-  transition: all 0.2s cubic-bezier(.46, 0, .18, 1);
+  @include transition(all, 0.2s, cubic-bezier(0.46, 0, 0.18, 1));
+}
+
+.transition-ease-out-half {
+  @include transition(all, 0.5s, cubic-bezier(0.46, 0, 0.18, 1));
 }

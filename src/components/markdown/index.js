@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import PropType from 'prop-types';
 import ReactDOM from 'react-dom';
-import Typeform from '@components/typeform';
+import Question from '@components/question';
 import ReactMarkdown from 'react-markdown';
 import ImageRenderer from './renderers/image.js';
 
@@ -13,7 +13,7 @@ import ImageRenderer from './renderers/image.js';
 // components function map to the matching react component
 const components = (name, props) => {
   return {
-    typeform: <Typeform {...props}></Typeform>
+    question: <div id="question-root"><Question {...props}></Question></div>
   }[name] || <span/>
 }
 
@@ -29,8 +29,9 @@ const Markdown = props => {
     nodes.forEach(node => {
       const props = JSON.parse(node.dataset.props);
       const div = document.createElement('div');
+      const parent = node.parentNode.parentNode;
       ReactDOM.render(components(node.dataset.component, props), div)
-      node.parentNode.replaceChild(div, node);
+      parent.parentNode.replaceChild(div, parent);
     })
   }, [])
 
