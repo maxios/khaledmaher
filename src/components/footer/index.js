@@ -8,7 +8,7 @@ const Footer = () => (
   <div className="footer__container d-flex flex-column justify-content-center">
     <div className="footer__social d-flex justify-content-center">
       <div className="footer__social-icon pointer">
-        <a target="_blank" rel="noreferrer" href="https://twitter.com/animaxios">
+        <a target="_blank" rel="noreferrer" href="https://twitter.com/wordybrain">
           <SVG id={TwitterIcon.id} size={20} color="#9BA6BF"/>
         </a>
       </div>
