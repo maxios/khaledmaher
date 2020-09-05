@@ -14,6 +14,15 @@
   top: 0;
 }
 
+.postTemplate__controls-group {
+  transition: all 0.2s ease-in-out;
+  @include breakpoint(mobile) {
+    margin-bottom: -80px;
+    padding-bottom: 80px !important;
+    background-color: $color-elegant
+  }
+}
+
 
 .postTemplate__controls-button {
   display: flex;

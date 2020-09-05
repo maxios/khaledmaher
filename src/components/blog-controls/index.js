@@ -27,7 +27,7 @@ const BlogControls = ({ pageContext, location }) => {
       <div
         className="postTemplate__controls-container d-flex align-items-end align-items-md-center z-index-5"
       >
-        <div className="d-flex flex-row flex-md-column justify-content-center fixed left col-12 p-0">
+        <div className="postTemplate__controls-group d-flex flex-row flex-md-column justify-content-center fixed left col-12 p-0">
           <AniLink fade duration={0.2} className="postTemplate__controls-button order-2 order-md-1" to={`/blog`}>
             <SVG id={ListIcon.id} size={50} color="white"/>
           </AniLink>
