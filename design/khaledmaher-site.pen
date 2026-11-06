@@ -2152,7 +2152,7 @@
                       "id": "J9gUV",
                       "name": "Email",
                       "fill": "$panel-accent",
-                      "content": "khaled@mindcache.ltd",
+                      "content": "khaled@mindcache.xyz",
                       "fontFamily": "$mono",
                       "fontSize": 24,
                       "fontWeight": "normal"
@@ -3767,7 +3767,7 @@
               "id": "WIens",
               "name": "Email",
               "fill": "$panel-accent",
-              "content": "khaled@mindcache.ltd",
+              "content": "khaled@mindcache.xyz",
               "fontFamily": "$mono",
               "fontSize": 19,
               "fontWeight": "normal"
@@ -8136,7 +8136,7 @@
                       "id": "LEjUH",
                       "name": "Email",
                       "fill": "$panel-accent",
-                      "content": "khaled@mindcache.ltd",
+                      "content": "khaled@mindcache.xyz",
                       "fontFamily": "$mono",
                       "fontSize": 24,
                       "fontWeight": "normal"

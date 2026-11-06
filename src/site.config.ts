@@ -15,8 +15,8 @@ export const site = {
    */
   description:
     'Khaled Maher is a solution architect in Cairo who helps software teams change how they work now that AI makes building cheap.',
-  email: 'khaled@mindcache.ltd',
-  /** Stays empty until mindcache.ltd resolves, so the site never links to a dead domain. */
+  email: 'khaled@mindcache.xyz',
+  /** Leave empty to link to the About page instead. */
   mindcacheUrl: '',
   social: {
     github: 'https://github.com/maxios',
