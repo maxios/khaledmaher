@@ -1,0 +1,43 @@
+---
+import WritingList from '../../components/WritingList.astro';
+import Base from '../../layouts/Base.astro';
+import { type Post, type WritingItem, getPosts, getTags } from '../../lib/content';
+
+// A rest parameter, because Obsidian tags can nest: `#design/type`.
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return getTags(posts).map(({ tag }) => ({
+    params: { tag },
+    props: { tag, posts: posts.filter((post) => post.tags.includes(tag)) },
+  }));
+}
+
+const { tag, posts } = Astro.props as { tag: string; posts: Post[] };
+const items = posts.map(
+  (post): WritingItem => ({
+    title: post.title,
+    url: post.url,
+    date: post.date,
+    kind: 'note',
+    detail: 'note',
+  }),
+);
+---
+
+{/* Tag pages only repeat other pages, so they stay out of search results. */}
+<Base title={`#${tag}`} description={`Writing by Khaled Maher tagged ${tag}.`} noindex>
+  <div class="page tag-page">
+    <h1 class="page-title">#{tag}</h1>
+    <WritingList items={items} />
+  </div>
+</Base>
+
+<style>
+  .tag-page {
+    padding-block: 3.5rem 7rem;
+  }
+
+  .tag-page :global(.writing-list) {
+    margin-top: 2.5rem;
+  }
+</style>

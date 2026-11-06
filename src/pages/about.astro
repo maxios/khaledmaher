@@ -1,0 +1,152 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import Entry from '../components/Entry.astro';
+import Prose from '../components/Prose.astro';
+import { proof } from '../data/proof';
+import Base from '../layouts/Base.astro';
+import { getPages } from '../lib/content';
+import { profilePageSchema } from '../lib/schema';
+import { site } from '../site.config';
+
+const page = (await getPages()).find(({ entry }) => entry.id === 'about');
+if (!page) throw new Error('[vault] vault/pages/About.md is missing or unpublished');
+
+const { Content } = await render(page.entry);
+const { heading, description } = page.entry.data;
+const url = new URL(Astro.url.pathname, Astro.site).href;
+
+// Drop a photo at src/assets/portrait.jpg and it appears here, with no code change.
+const portraits = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/portrait.{jpg,jpeg,png,webp}',
+  { eager: true },
+);
+const portrait = Object.values(portraits)[0]?.default;
+---
+
+<Base
+  title={`About ${site.name} · Solution architect in Cairo`}
+  exactTitle
+  {description}
+  schema={[profilePageSchema(url)]}
+>
+  <div class="page about">
+    <aside>
+      {
+        portrait && (
+          <Image
+            class="portrait"
+            src={portrait}
+            alt={`Portrait of ${site.name}`}
+            widths={[400, 800]}
+            sizes="(max-width: 60rem) 100vw, 25rem"
+            loading="eager"
+          />
+        )
+      }
+      <Entry brief={Boolean(portrait)} />
+    </aside>
+    <div class="main">
+      <h1>{heading ?? page.title}</h1>
+      <Prose>
+        <Content />
+      </Prose>
+      <section class="proof">
+        <h2>No client numbers to show yet.<br />Here’s what there is.</h2>
+        <ul>
+          {
+            proof.map((item) => (
+              <li>
+                <span class="label">{item.kind}</span>
+                <span class="title">{item.title}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .about {
+    display: grid;
+    grid-template-columns: 25rem minmax(0, 1fr);
+    gap: 3rem 6rem;
+    align-items: start;
+    padding-block: 3.5rem 7rem;
+  }
+
+  aside {
+    position: sticky;
+    top: 2rem;
+  }
+
+  .portrait {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 1.375rem;
+    border-radius: 2px;
+  }
+
+  h1 {
+    margin: 0 0 1.875rem;
+    font-size: min(9vw, 4.5rem);
+    letter-spacing: -0.022em;
+    line-height: 1.06;
+  }
+
+  .proof {
+    margin-top: 4.5rem;
+  }
+
+  .proof h2 {
+    margin: 0 0 1.375rem;
+    font-size: min(7.5vw, 2.75rem);
+    letter-spacing: -0.018em;
+    line-height: 1.12;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: 8.125rem minmax(0, 1fr);
+    gap: 0.25rem 1.75rem;
+    padding-block: 1rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  li .label {
+    padding-top: 0.25rem;
+  }
+
+  .title {
+    font-size: 1.4375rem;
+    line-height: 1.34;
+  }
+
+  @media (max-width: 60rem) {
+    .about {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    aside {
+      position: static;
+      order: 2;
+    }
+
+    li {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .title {
+      font-size: 1.25rem;
+    }
+  }
+</style>

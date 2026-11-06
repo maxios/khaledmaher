@@ -1,0 +1,134 @@
+# khaledmaher
+
+The source of [khaledmaher.com](https://khaledmaher.com). Posts are written in Obsidian, built with Astro, and deployed to GitHub Pages on every push to `main`. The design lives in `design/khaledmaher-site.pen`, with its brand sheet in the same file.
+
+## Getting started
+
+You need [Bun](https://bun.sh) and Node 24. Astro 7 won't start on older versions of Node.
+
+```sh
+nvm use
+bun install
+bun run dev
+```
+
+In Obsidian, choose **Open folder as vault** and pick the `vault/` folder.
+
+| Command           | What it does                         |
+| ----------------- | ------------------------------------ |
+| `bun run dev`     | Local site, with drafts visible      |
+| `bun run build`   | Production build into `dist/`        |
+| `bun run preview` | Serves `dist/` (runs in background; `bunx astro preview stop` ends it) |
+| `bun test`        | Tests for the vault and Markdown code |
+| `bun run check`   | Type check                           |
+
+## Writing a post
+
+Create a note in `vault/posts/`. The **Post** template fills in the properties.
+
+```yaml
+---
+title: Optional. Defaults to the file name.
+description: Required to publish. Aim for 120 to 160 characters.
+date: 2026-11-06
+updated: 2026-11-07   # optional
+tags: [meta]
+slug: custom-url      # optional. Defaults to the file name.
+experience: loop      # optional. See "Adding an experience".
+publish: true
+---
+```
+
+**Nothing appears on the site until it has `publish: true`.** A published post also needs a `date` and a `description`, and the build stops without them. Drafts show up under `bun run dev` with a Draft badge, and they're left out of production builds entirely: pages, feed, sitemap, graph and images.
+
+> [!warning]
+> That only protects the built site. If this repository is public, every file in `vault/` can be read on GitHub, including drafts and `%%comments%%`. Keep private material out of the repository, or keep the repository private.
+
+Notes in `vault/pages/` become top-level pages. `About.md` holds the words of `/about/`, and its layout is in `src/pages/about.astro`. Put a photo at `src/assets/portrait.jpg` and it appears on that page. Notes anywhere else can be used for your own reference and are never published.
+
+## What works
+
+| Syntax                                      | On the site                                     |
+| ------------------------------------------- | ----------------------------------------------- |
+| `[[Note]]`, `[[Note\|alias]]`               | A link, using the note's title or the alias     |
+| `[[Note#Heading]]`, `[[#Heading]]`          | A link to that heading                          |
+| `[[Note#^block]]` and `^block` markers      | A link to that block                            |
+| `[[Missing]]`, `[[Unpublished note]]`       | Plain text, with a warning in the build log     |
+| `![[image.png]]`, `\|300`, `\|300x200`, `\|alt\|300` | An optimised image                     |
+| `> [!type] Title`, `> [!type]-`, `> [!type]+` | A callout, optionally foldable, can be nested |
+| `==highlight==`                             | Highlighted text                                |
+| `%%comment%%`                               | Removed, even across paragraphs                 |
+| Standard `[text](Note.md)` and `![](x.png)` | Resolved through the vault                      |
+
+These don't work yet:
+
+- `![[Note]]` shows a link to the note rather than its content.
+- `![[clip.mp4]]`, and audio or PDF embeds, stop the build with a clear error. Only image embeds are supported.
+- Inline `#tags` stay as text. Tags come from the `tags` property.
+- Math and Mermaid aren't set up. Mermaid fences show as code.
+
+A broken image embed or an invalid island fence in a published post stops the production build, so it can't ship. Under `bun run dev` they only warn.
+
+## Adding an island
+
+A fenced block can become a live React component. `Sim` is the example.
+
+1. Add the component to `src/islands/`.
+2. Add the fence language and its props to `src/islands/registry.ts`.
+3. Add one line to `src/components/Island.astro`.
+
+Then write it in a note. The body is YAML, checked against the schema at build time:
+
+````md
+```sim
+type: loop
+speed: 2
+```
+````
+
+## Adding an experience
+
+An experience is a post with its own layout. The words stay in Obsidian, and the layout lives in Astro.
+
+1. Create `src/experiences/<name>.astro`. It receives `post`, `intro` and `sections`, with one section per `##` heading. `loop.astro` is the example.
+2. Set `experience: <name>` in the note's properties.
+
+## Editing the site
+
+| What                                     | Where                     |
+| ---------------------------------------- | ------------------------- |
+| Name, description, email, links, nav     | `src/site.config.ts`      |
+| The dictionary on the home page          | `src/data/dictionary.ts`  |
+| Guides on the writing page               | `src/data/guides.ts`      |
+| "What there is to show" on the About page | `src/data/proof.ts`       |
+
+A guide's row becomes a link as soon as you give it a `url`. The Mindcache link falls back to the About page until `mindcacheUrl` is set.
+
+## SEO
+
+Most of it runs itself:
+
+- Every page gets a title, description, canonical URL, Open Graph tags and Schema.org data from `src/components/Seo.astro` and `src/lib/schema.ts`. All of them describe one `Person`, so search engines see one author.
+- The sitemap comes from the published pages, with `lastmod` taken from `updated`, or `date`.
+- Tag pages and the 404 page are `noindex`, and stay out of the sitemap, because they only repeat other pages.
+- `/llms.txt` lists the site for AI agents. Google doesn't use it.
+
+Your part is the writing. Keep titles under 60 characters including the name, keep descriptions between 120 and 160, and use `site.description` word for word on other profiles.
+
+Grammar labels in the hero are CSS content on purpose. As text, they would become part of the `<h1>`.
+
+## Deploying
+
+`.github/workflows/deploy.yml` runs the tests, type check and build, then publishes to GitHub Pages. In the repository settings, set **Pages → Source** to **GitHub Actions** and set the custom domain to `khaledmaher.com`. The workflow reads the site URL and subpath from those settings, so canonical URLs match wherever the site is served.
+
+After the first deploy, verify the domain in Google Search Console and Bing Webmaster Tools, and submit `sitemap-index.xml` to both.
+
+## Why some things look the way they do
+
+- **Scripts run Astro on Node, not Bun.** The Bun runtime crashes loading React's server build. Bun still installs packages, runs scripts and runs the tests.
+- **`build` passes `--force`.** Astro caches each note by its own text, so publishing a note wouldn't update the links to it in other notes.
+- **The vault code uses `unified()` instead of Astro's default Markdown processor.** It gives access to the remark plugin ecosystem, and the vault code is a remark plugin.
+- **`smartypants` is off, and re-added after the vault plugin.** It normally runs first and would curl the apostrophe in `[[Don't stop]]`, which breaks the link.
+- **`font-optical-sizing` is off.** Newsreader's automatic optical size draws wider than the design and wraps the hero sentence.
+- **`typescript` is pinned to 6.** `astro check` doesn't support 7 yet.
+- **`overrides` pins `@emnapi/runtime`.** Otherwise Bun installs a beta that's incompatible with `@emnapi/core`, and `astro check` crashes.

@@ -1,0 +1,591 @@
+---
+import Arrow from '../components/Arrow.astro';
+import Entry from '../components/Entry.astro';
+import Parse from '../components/Parse.astro';
+import { dictionary, lab } from '../data/dictionary';
+import Graph from '../islands/Graph';
+import Base from '../layouts/Base.astro';
+import { formatDate, getGraph, getWriting, href } from '../lib/content';
+import { site } from '../site.config';
+
+const latest = (await getWriting()).slice(0, 5);
+const graph = getGraph();
+const mindcache = site.mindcacheUrl || href('/about/');
+const queues = [
+  ['the decision inbox', 'Developers wait on product answers.'],
+  ['the verify inbox', 'Reviews wait longer than the code took to write.'],
+  ['absorption', 'Users, support and sales can’t keep up with what shipped.'],
+];
+const rules = ['Async and in writing', 'Fixed price, never hourly', 'Never on your critical path'];
+---
+
+<Base panelFooter>
+  <section class="hero page">
+    <h1 class="sentence">
+      <span class="line">
+        <span class="word">I</span>
+        <Parse label="verb · design, test, maintain" short="verb">engineer</Parse>
+        <Parse label="object · protocols, methods, maps" short="object">the language</Parse>
+      </span>
+      <span class="line">
+        <Parse label="subject · teams and their agents" short="subject">people and machines</Parse>
+        <Parse label="verb · decide, verify, learn" short="verb">work in.</Parse>
+      </span>
+    </h1>
+    <div class="hero-below">
+      <div class="pitch">
+        <p>
+          AI made building cheap. Deciding didn’t. I help software teams change how they work around
+          that, and I write the protocols and methods that keep the change in place.
+        </p>
+        <div class="actions">
+          <a class="button" href="#contact">Work with me <Arrow /></a>
+          <a class="text-link" href={href('/writing/')}>Read the writing</a>
+        </div>
+      </div>
+      <Entry />
+    </div>
+  </section>
+
+  <section class="correction">
+    <div class="page">
+      <h2>
+        Work waits{' '}
+        <span class="tail">for <span class="proof"><del>code</del> <ins>people</ins></span>.</span>
+      </h2>
+      <div class="explain">
+        <div class="argument">
+          <p>
+            AI made building cheap, so the constraint moved. Most companies bought the tools and kept
+            the system, and work now queues in front of the people it depends on.
+          </p>
+          <a class="text-link" href={mindcache}>Mindcache is how I change that <Arrow /></a>
+        </div>
+        <dl class="queues">
+          {
+            queues.map(([term, meaning]) => (
+              <div>
+                <dt class="label">{term}</dt>
+                <dd>{meaning}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="section page">
+    <h2 class="section-heading">When the word didn’t exist,<br />I wrote it.</h2>
+    <dl class="dictionary">
+      {
+        dictionary.map((entry) => (
+          <div class="entry">
+            <dt>
+              <dfn>{entry.href ? <a href={entry.href}>{entry.term}</a> : entry.term}</dfn>
+              <span class="label">{entry.sense}</span>
+            </dt>
+            <dd class="definition">{entry.definition}</dd>
+            <dd class="label status">{entry.status}</dd>
+          </div>
+        ))
+      }
+    </dl>
+    <p class="label lab">Also in the lab: {lab.join(' · ')}</p>
+  </section>
+
+  <section class="writing page">
+    <div class="writing-column">
+      <h2 class="section-heading">I think in writing.</h2>
+      <p class="writing-intro">
+        Guides, notes and experiments, written in Obsidian and linked the way I think about them.
+      </p>
+      <ol class="latest">
+        {
+          latest.map((item) => (
+            <li>
+              {item.url ? <a href={item.url}>{item.title}</a> : <span>{item.title}</span>}
+              <p class="label">
+                {formatDate(item.date)}
+                {item.kind === 'guide' && ` · ${item.detail.replace('guide · ', '')}`}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+      <a class="text-link" href={href('/writing/')}>All writing <Arrow /></a>
+    </div>
+    <div class="graph-slot">
+      <Graph client:visible nodes={graph.nodes} links={graph.links} compact />
+    </div>
+  </section>
+
+  <section class="languages page">
+    <p class="parallel">
+      <span>I work in Arabic and English.</span>
+      <span lang="ar" dir="rtl" class="arabic">أعمل بالعربية والإنجليزية</span>
+    </p>
+    <ul class="rules">
+      {rules.map((rule) => <li class="label">{rule}</li>)}
+    </ul>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="page">
+      <h2>Write to me.</h2>
+      <div class="reach">
+        <div class="invitation">
+          <p>Tell me where your work is waiting. I reply in writing, in English or Arabic.</p>
+          <a class="email" href={`mailto:${site.email}`}>{site.email}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding-block: 3.5rem 6.5rem;
+  }
+
+  .sentence {
+    margin: 0;
+    font-size: min(7.2vw, 6.5rem);
+    letter-spacing: -0.024em;
+    line-height: 1.02;
+    text-wrap: initial;
+  }
+
+  .line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.27em;
+  }
+
+  .line + .line {
+    margin-top: 1.625rem;
+  }
+
+  .hero-below {
+    display: grid;
+    grid-template-columns: minmax(0, 40rem) minmax(0, 28.75rem);
+    gap: 3rem;
+    justify-content: space-between;
+    align-items: start;
+    margin-top: 4rem;
+  }
+
+  .pitch p {
+    margin: 0;
+    font-size: 1.6875rem;
+    line-height: 1.34;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.75rem;
+    margin-top: 2rem;
+  }
+
+  .hero-below :global(.self-entry) {
+    padding-top: 1.125rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .correction {
+    padding-block: 8rem 7.5rem;
+    background: var(--panel);
+    color: var(--on-panel);
+  }
+
+  .correction h2 {
+    margin: 0;
+    font-size: min(7.8vw, 7rem);
+    letter-spacing: -0.022em;
+    line-height: 1.02;
+    text-wrap: initial;
+  }
+
+  .tail {
+    white-space: nowrap;
+  }
+
+  .proof {
+    position: relative;
+    display: inline-block;
+  }
+
+  .proof del {
+    position: relative;
+    color: var(--on-panel-muted);
+    text-decoration: none;
+  }
+
+  .proof del::after {
+    position: absolute;
+    top: 57%;
+    right: -0.07em;
+    left: -0.07em;
+    height: 0.045em;
+    background: var(--panel-accent);
+    content: '';
+    transform-origin: left;
+  }
+
+  .proof ins {
+    position: absolute;
+    bottom: 1.24em;
+    left: 50%;
+    color: var(--panel-accent);
+    font-size: 0.68em;
+    font-style: italic;
+    line-height: 1.05;
+    text-decoration: none;
+    white-space: nowrap;
+    transform: translateX(-50%);
+  }
+
+  @supports (animation-timeline: view()) {
+    .proof del::after {
+      animation: draw linear both;
+      animation-timeline: view();
+      animation-range: entry 45% cover 40%;
+    }
+  }
+
+  .explain {
+    display: grid;
+    grid-template-columns: minmax(0, 32.5rem) minmax(0, 37.5rem);
+    gap: 3rem 5rem;
+    justify-content: space-between;
+    align-items: start;
+    margin-top: 4.5rem;
+  }
+
+  .argument p {
+    margin: 0 0 1.625rem;
+    font-size: 1.5625rem;
+    line-height: 1.4;
+  }
+
+  .argument .text-link {
+    color: var(--panel-accent);
+  }
+
+  .queues {
+    margin: 0;
+  }
+
+  .queues div {
+    padding-block: 1.125rem;
+    border-top: 1px solid var(--panel-rule);
+  }
+
+  .queues dt {
+    color: var(--on-panel-muted);
+  }
+
+  .queues dd {
+    margin: 0.375rem 0 0;
+    font-size: 1.375rem;
+    line-height: 1.35;
+  }
+
+  .dictionary {
+    margin: 4rem 0 0;
+  }
+
+  .entry {
+    display: grid;
+    grid-template-columns: 26.875rem minmax(0, 1fr) 15rem;
+    gap: 0.5rem 3rem;
+    padding-block: 1.875rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .entry dt {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .entry dfn {
+    font-size: 3.375rem;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: -0.018em;
+    line-height: 1.05;
+  }
+
+  .entry dd {
+    margin: 0;
+  }
+
+  .definition {
+    font-size: 1.5rem;
+    line-height: 1.4;
+  }
+
+  .status {
+    padding-top: 0.4375rem;
+    text-align: end;
+  }
+
+  .lab {
+    margin-top: 2rem;
+  }
+
+  .writing {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 37.5rem;
+    gap: 5rem;
+    padding-bottom: 8rem;
+  }
+
+  .writing-intro {
+    margin: 1rem 0 2.5rem;
+    color: var(--muted);
+    font-size: 1.4375rem;
+    line-height: 1.42;
+  }
+
+  .latest {
+    margin: 0 0 2.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .latest li {
+    padding-block: 1rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .latest a,
+  .latest span {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    text-decoration: none;
+  }
+
+  .latest .label {
+    margin-top: 0.375rem;
+  }
+
+  .graph-slot {
+    min-height: 42.5rem;
+  }
+
+  .languages {
+    padding-bottom: 8rem;
+  }
+
+  .parallel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 2rem;
+    margin: 0;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--rule);
+    font-size: 3.5rem;
+    font-weight: 500;
+    letter-spacing: -0.018em;
+    line-height: 1.2;
+  }
+
+  .parallel .arabic {
+    font-size: 3.625rem;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .rules {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem 2.75rem;
+    margin: 2.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .rules li {
+    font-size: 0.9375rem;
+  }
+
+  .contact {
+    padding-block: 8rem 3.5rem;
+    background: var(--panel);
+    color: var(--on-panel);
+  }
+
+  .contact h2 {
+    margin: 0;
+    font-size: min(11.7vw, 10.5rem);
+    letter-spacing: -0.024em;
+    line-height: 1;
+    text-wrap: initial;
+  }
+
+  .invitation {
+    max-width: 40rem;
+    margin-top: 3.5rem;
+  }
+
+  .invitation p {
+    margin: 0 0 1.5rem;
+    font-size: 1.6875rem;
+    line-height: 1.34;
+  }
+
+  .email {
+    color: var(--panel-accent);
+    font-family: var(--mono);
+    font-size: 1.5rem;
+    text-decoration-color: currentcolor;
+  }
+
+  @media (max-width: 60rem) {
+    .hero-below,
+    .explain,
+    .writing {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .graph-slot {
+      display: none;
+    }
+
+    .entry {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .status {
+      padding-top: 0;
+      text-align: start;
+    }
+
+    .writing,
+    .languages {
+      padding-bottom: 4rem;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .hero {
+      padding-block: 1.75rem 3.5rem;
+    }
+
+    .sentence {
+      font-size: 10.5vw;
+    }
+
+    .line + .line {
+      margin-top: 0.25rem;
+    }
+
+    .hero-below {
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .pitch p {
+      font-size: 1.3125rem;
+      line-height: 1.38;
+    }
+
+    .actions {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+    }
+
+    .actions .text-link {
+      justify-content: center;
+    }
+
+    .correction,
+    .contact {
+      padding-block: 4.5rem 3.5rem;
+    }
+
+    .correction h2 {
+      font-size: 15.4vw;
+    }
+
+    .tail {
+      display: inline-block;
+      margin-top: 0.62em;
+    }
+
+    .explain {
+      margin-top: 2.25rem;
+    }
+
+    .argument p {
+      font-size: 1.25rem;
+    }
+
+    .queues dd {
+      font-size: 1.1875rem;
+    }
+
+    .dictionary {
+      margin-top: 2rem;
+    }
+
+    .entry {
+      padding-block: 1.25rem;
+    }
+
+    .entry dfn {
+      font-size: 2.375rem;
+    }
+
+    .definition {
+      font-size: 1.1875rem;
+    }
+
+    .writing-intro {
+      font-size: 1.1875rem;
+    }
+
+    .latest a,
+    .latest span {
+      font-size: 1.25rem;
+    }
+
+    .parallel {
+      padding-top: 1.5rem;
+      font-size: 1.875rem;
+    }
+
+    .parallel .arabic {
+      width: 100%;
+      font-size: 2rem;
+      text-align: right;
+    }
+
+    .rules {
+      flex-direction: column;
+    }
+
+    .contact h2 {
+      font-size: 16.4vw;
+    }
+
+    .invitation {
+      margin-top: 1.75rem;
+    }
+
+    .invitation p {
+      font-size: 1.3125rem;
+    }
+
+    .email {
+      font-size: 1.1875rem;
+    }
+  }
+</style>

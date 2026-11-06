@@ -1,0 +1,29 @@
+---
+import Graph from '../islands/Graph';
+import Base from '../layouts/Base.astro';
+import { getGraph, href } from '../lib/content';
+
+const { nodes, links } = getGraph();
+---
+
+<Base
+  title="How the writing links together"
+  description="A live map of how Khaled Maher’s writing connects, drawn from the links in the notes themselves. Drag a node to see what depends on what."
+>
+  <div class="page graph-page">
+    <div class="intro">
+      <h1 class="page-title">Graph</h1>
+      <p class="lede">Every published post, and the links between them.</p>
+      <noscript>
+        <p>The graph needs JavaScript. All the writing is listed on the <a href={href('/writing/')}>writing page</a>.</p>
+      </noscript>
+    </div>
+    <Graph client:load nodes={nodes} links={links} />
+  </div>
+</Base>
+
+<style>
+  .graph-page {
+    padding-block: 3.5rem 5rem;
+  }
+</style>

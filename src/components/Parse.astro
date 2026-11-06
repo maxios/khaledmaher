@@ -1,0 +1,13 @@
+---
+interface Props {
+  /** The grammar label under the bracket. */
+  label?: string;
+  /** A shorter label for narrow screens. */
+  short?: string;
+}
+
+const { label, short = label } = Astro.props;
+---
+
+{/* The labels are CSS content, not text, so a heading stays one clean sentence for crawlers. */}
+<span class="parse" data-label={label} data-short={short}><slot /></span>

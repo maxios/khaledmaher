@@ -1,0 +1,24 @@
+---
+import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
+import type { Post } from '../lib/content';
+import { splitSections } from '../lib/sections';
+
+interface Props {
+  name: string;
+  post: Post;
+}
+
+const layouts = import.meta.glob<{ default: AstroComponentFactory }>('../experiences/*.astro', {
+  eager: true,
+});
+
+const { name, post } = Astro.props;
+const Layout = layouts[`../experiences/${name}.astro`]?.default;
+if (!Layout) {
+  throw new Error(`[vault] "${post.title}" asks for experience "${name}", but src/experiences/${name}.astro doesn't exist`);
+}
+
+const { intro, sections } = splitSections(await Astro.slots.render('default'));
+---
+
+<Layout post={post} intro={intro} sections={sections} />

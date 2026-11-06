@@ -1,0 +1,27 @@
+---
+import { site } from '../site.config';
+
+interface Props {
+  /** Just the headword, for use beside a portrait. */
+  brief?: boolean;
+}
+
+const { brief = false } = Astro.props;
+---
+
+<div class="self-entry">
+  <p class="self-headword">
+    <span>khaled maher</span>
+    <span lang="ar" dir="rtl" class="arabic">{site.nameArabic}</span>
+  </p>
+  <p class="label">noun · Cairo, Egypt</p>
+  {
+    !brief && (
+      <ol>
+        <li>A solution architect with more than ten years of building software.</li>
+        <li>The person behind Mindcache, an async practice for teams working with AI.</li>
+        <li>Writes first, in English or Arabic.</li>
+      </ol>
+    )
+  }
+</div>

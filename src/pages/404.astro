@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import { href } from '../lib/content';
+---
+
+<Base title="Not found" description="This page doesn’t exist, or it hasn’t been published yet." noindex>
+  <div class="page measure not-found">
+    <h1 class="page-title">Not found</h1>
+    <p class="lede">This page doesn’t exist, or it hasn’t been published yet.</p>
+    <p><a href={href('/')}>Back to the home page</a></p>
+  </div>
+</Base>
+
+<style>
+  .not-found {
+    padding-block: 3.5rem 7rem;
+  }
+</style>

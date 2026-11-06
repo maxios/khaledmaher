@@ -1,0 +1,88 @@
+---
+import '@fontsource-variable/newsreader/opsz.css';
+import '@fontsource-variable/newsreader/opsz-italic.css';
+import '@fontsource-variable/jetbrains-mono/wght.css';
+import '@fontsource/amiri/arabic-400.css';
+import newsreader from '@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2?url';
+import '../styles/global.css';
+import Seo, { type SeoProps } from '../components/Seo.astro';
+import { href } from '../lib/content';
+import { site } from '../site.config';
+
+interface Props extends SeoProps {
+  /** Continues the dark contact band into the footer. */
+  panelFooter?: boolean;
+}
+
+const { panelFooter = false, ...seo } = Astro.props;
+// A post belongs to Writing, even though its URL starts with /posts/.
+const currentPath = Astro.url.pathname.replace(href('/posts/'), href('/writing/'));
+const isCurrent = (path: string) => currentPath.startsWith(path);
+---
+
+<!doctype html>
+<html lang={site.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#faf7f0" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#151311" media="(prefers-color-scheme: dark)" />
+    <link rel="preload" href={newsreader} as="font" type="font/woff2" crossorigin />
+    <Seo {...seo} />
+    <link rel="icon" href={href('/favicon.svg')} type="image/svg+xml" />
+    <link rel="icon" href={href('/favicon-48.png')} sizes="48x48" type="image/png" />
+    <link rel="apple-touch-icon" href={href('/apple-touch-icon.png')} />
+    <link rel="alternate" type="application/rss+xml" title={site.name} href={href('/rss.xml')} />
+    <link rel="sitemap" href={href('/sitemap-index.xml')} />
+    <link rel="author" href={href('/about/')} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header page">
+      <a class="brand" href={href('/')}>
+        <span>{site.name}</span>
+        <span lang="ar" dir="rtl" class="arabic">{site.nameArabic}</span>
+      </a>
+      <button class="menu-button" type="button" popovertarget="site-nav" aria-label="Menu">
+        <svg
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+      <nav id="site-nav" class="site-nav" popover="auto" aria-label="Main">
+        {
+          site.nav.map((item) => {
+            const target = href(item.href);
+            return (
+              <a href={target} aria-current={isCurrent(target) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            );
+          })
+        }
+      </nav>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class:list={['site-footer', { 'on-panel': panelFooter }]}>
+      <div class="page footer-row">
+        <span class="label">© 2026 {site.name} · {site.city}</span>
+        <div class="footer-links">
+          <a href={site.social.github} rel="me">GitHub</a>
+          <a href={site.social.x} rel="me">X</a>
+          <a href={href('/rss.xml')}>RSS</a>
+          <span lang="ar" dir="rtl" class="arabic">{site.nameArabic}</span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

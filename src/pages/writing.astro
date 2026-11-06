@@ -1,0 +1,83 @@
+---
+import Parse from '../components/Parse.astro';
+import WritingList from '../components/WritingList.astro';
+import Base from '../layouts/Base.astro';
+import { getWriting } from '../lib/content';
+import { collectionPageSchema } from '../lib/schema';
+
+const description =
+  'Every guide and note by Khaled Maher on how software teams decide, verify and learn, now that AI has made the building itself cheap.';
+const items = await getWriting();
+const count = (kind: string) => items.filter((item) => item.kind === kind).length;
+const url = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<Base
+  title="Writing on AI and software teams"
+  {description}
+  schema={[collectionPageSchema(url, 'Writing', description)]}
+>
+  <div class="page writing-page">
+    <h1 class="page-title">
+      <Parse label="noun · what I think, on the record" short="noun">Writing</Parse>
+    </h1>
+    <fieldset class="filters">
+      <legend>Show</legend>
+      <label><input type="radio" name="kind" value="all" checked /><span>All · {items.length}</span></label>
+      <label><input type="radio" name="kind" value="guide" /><span>Guides · {count('guide')}</span></label>
+      <label><input type="radio" name="kind" value="note" /><span>Notes · {count('note')}</span></label>
+    </fieldset>
+    <WritingList items={items} />
+  </div>
+</Base>
+
+<style>
+  .writing-page {
+    padding-block: 3.5rem 7rem;
+  }
+
+  .filters {
+    display: flex;
+    gap: 1.75rem;
+    margin: 2.25rem 0 1.75rem;
+    padding: 0;
+    border: 0;
+    font-family: var(--mono);
+    font-size: 0.9375rem;
+  }
+
+  legend {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  label {
+    position: relative;
+    color: var(--muted);
+    cursor: pointer;
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+  }
+
+  input:checked + span {
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+  }
+
+  input:focus-visible + span {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .writing-page:has(input[value='guide']:checked) :global([data-kind='note']),
+  .writing-page:has(input[value='note']:checked) :global([data-kind='guide']) {
+    display: none;
+  }
+</style>

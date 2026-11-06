@@ -1,0 +1,14 @@
+---
+import type { IslandName } from '../islands/registry';
+import Sim from '../islands/Sim';
+
+interface Props {
+  name: IslandName;
+  props: Record<string, unknown>;
+}
+
+const { name, props } = Astro.props;
+---
+
+{/* Astro has to see each `client:` directive to bundle it, so each island gets its own line. */}
+{name === 'sim' && <Sim client:visible {...props} />}

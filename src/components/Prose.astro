@@ -1,0 +1,26 @@
+---
+import { splitIslands } from '../islands/placeholder';
+import Island from './Island.astro';
+
+interface Props {
+  /** Already rendered HTML. Without it, the default slot is rendered instead. */
+  html?: string;
+}
+
+// Rendering the slot to a string, rather than reading `entry.rendered.html`,
+// means Astro has already resolved the optimised image URLs.
+const html = Astro.props.html ?? (await Astro.slots.render('default'));
+const parts = splitIslands(html);
+---
+
+<div class="prose">
+  {
+    parts.map((part) =>
+      part.kind === 'html' ? (
+        <Fragment set:html={part.html} />
+      ) : (
+        <Island name={part.name} props={part.props} />
+      ),
+    )
+  }
+</div>

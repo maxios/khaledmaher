@@ -1,0 +1,27 @@
+---
+import { type WritingItem, formatDate } from '../lib/content';
+
+interface Props {
+  items: WritingItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<ol class="writing-list">
+  {
+    items.map((item) => (
+      <li data-kind={item.kind}>
+        <time datetime={item.date.toISOString()}>{formatDate(item.date)}</time>
+        {item.url ? (
+          <a class="writing-title" href={item.url}>
+            {item.title}
+          </a>
+        ) : (
+          <span class="writing-title">{item.title}</span>
+        )}
+        <span class="writing-kind">{item.detail}</span>
+      </li>
+    ))
+  }
+</ol>

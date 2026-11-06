@@ -1,0 +1,114 @@
+.sim {
+  margin: 2.5rem 0;
+  padding: 1rem;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+.sim svg {
+  display: block;
+  width: min(100%, 22rem);
+  margin-inline: auto;
+  /* Long labels may extend past the drawing into the figure's own space. */
+  overflow: visible;
+}
+
+.sim-ring,
+.sim-axis {
+  fill: none;
+  stroke: var(--rule);
+  stroke-width: 2;
+}
+
+.sim-node {
+  fill: var(--surface);
+  stroke: var(--muted);
+  stroke-width: 2;
+  transition: fill 160ms ease-out, stroke 160ms ease-out;
+}
+
+/* The pulse passing through is a tint, so it can't be mistaken for the current step. */
+.sim-node.sim-hot {
+  fill: color-mix(in srgb, var(--accent) 30%, var(--surface));
+  stroke: var(--accent);
+}
+
+.sim-active .sim-node,
+.sim-active .sim-node.sim-hot {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+.sim-pulse {
+  fill: var(--accent);
+}
+
+.sim-wave {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+
+.sim-label {
+  fill: var(--muted);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.sim-active .sim-label {
+  fill: var(--ink);
+  font-weight: 600;
+}
+
+.sim-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin-top: 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.sim-controls button {
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.sim-controls button:hover {
+  border-color: var(--accent);
+}
+
+.sim-controls label {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 12rem;
+}
+
+.sim-controls input {
+  flex: 1;
+  min-width: 0;
+  accent-color: var(--accent);
+}
+
+.sim-controls output {
+  min-width: 2.5rem;
+  text-align: end;
+}
+
+.sim figcaption {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-style: italic;
+}

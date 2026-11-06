@@ -1,0 +1,53 @@
+{
+  "name": "khaledmaher",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build --force",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.6",
+    "@astrojs/react": "^7.1.4",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "@fontsource-variable/newsreader": "^5.3.0",
+    "@fontsource/amiri": "^5.3.0",
+    "astro": "^7.4.7",
+    "d3-force": "^3.0.1",
+    "github-slugger": "^2.0.0",
+    "mdast-util-to-string": "^4.0.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "remark-smartypants": "^3.0.3",
+    "unist-util-visit": "^5.2.0",
+    "yaml": "^2.9.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@types/bun": "^1.4.4",
+    "@types/d3-force": "^3.0.10",
+    "@types/mdast": "^4.0.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "rehype-raw": "^7.0.0",
+    "rehype-stringify": "^10.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "typescript": "^6.0.3",
+    "unified": "^11.0.5",
+    "vfile": "^6.0.3"
+  },
+  "overrides": {
+    "@emnapi/runtime": "1.11.3"
+  }
+}

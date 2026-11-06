@@ -1,0 +1,107 @@
+---
+import Prose from '../components/Prose.astro';
+import LoopStage from '../islands/LoopStage';
+import type { Post } from '../lib/content';
+import type { Section } from '../lib/sections';
+
+interface Props {
+  post: Post;
+  intro: string;
+  sections: Section[];
+}
+
+const { post, intro, sections } = Astro.props;
+---
+
+<article class="loop">
+  <header class="loop-intro">
+    <h1>{post.title}</h1>
+    <Prose html={intro} />
+  </header>
+  <div class="loop-body">
+    <div class="loop-stage">
+      <LoopStage client:visible labels={sections.map((section) => section.title)} />
+    </div>
+    <div class="loop-steps">
+      {
+        sections.map((section, index) => (
+          <section data-step={index}>
+            <Prose html={section.html} />
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</article>
+
+<style>
+  .loop {
+    width: min(100%, 68rem);
+    margin-inline: auto;
+  }
+
+  .loop-intro {
+    max-width: var(--measure);
+    margin: 0 auto 3rem;
+  }
+
+  .loop-intro h1 {
+    margin: 0 0 1.5rem;
+    font-size: clamp(2.25rem, 6vw, 3.25rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+  }
+
+  .loop-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .loop-stage {
+    position: sticky;
+    top: 2rem;
+  }
+
+  .loop-stage :global(.sim) {
+    margin: 0;
+  }
+
+  .loop-steps section {
+    display: flex;
+    min-height: 70vh;
+    align-items: center;
+  }
+
+  @media (max-width: 52rem) {
+    .loop-body {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .loop-stage {
+      top: 0;
+      z-index: 1;
+      background: var(--paper);
+    }
+
+    .loop-stage :global(svg) {
+      width: min(100%, 13rem);
+    }
+
+    /* The drawing shrinks to about half size here, so its text has to double. */
+    .loop-stage :global(.sim-label) {
+      font-size: 24px;
+    }
+
+    .loop-stage :global(.sim-controls) {
+      display: none;
+    }
+
+    .loop-steps section {
+      min-height: 55vh;
+    }
+  }
+</style>

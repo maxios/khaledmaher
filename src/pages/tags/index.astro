@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPosts, getTags, href } from '../../lib/content';
+
+const tags = getTags(await getPosts());
+---
+
+<Base title="Tags" description="Every tag used in Khaled Maher’s writing." noindex>
+  <div class="page measure tags-page">
+    <h1 class="page-title">Tags</h1>
+    <ul class="tag-list">
+      {
+        tags.map(({ tag, count }) => (
+          <li>
+            <a href={href(`/tags/${tag}/`)}>#{tag}</a>
+            <span>{count}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Base>
+
+<style>
+  .tags-page {
+    padding-block: 3.5rem 7rem;
+  }
+</style>

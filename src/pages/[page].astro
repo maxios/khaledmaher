@@ -1,0 +1,40 @@
+---
+import { render } from 'astro:content';
+import Prose from '../components/Prose.astro';
+import Base from '../layouts/Base.astro';
+import { getPages } from '../lib/content';
+
+export async function getStaticPaths() {
+  const pages = await getPages();
+  // The About page has its own layout, in about.astro.
+  return pages
+    .filter((page) => page.entry.id !== 'about')
+    .map((page) => ({ params: { page: page.entry.id }, props: { page } }));
+}
+
+const { page } = Astro.props as { page: Awaited<ReturnType<typeof getPages>>[number] };
+const { Content } = await render(page.entry);
+const { heading, description } = page.entry.data;
+---
+
+<Base title={page.title} {description}>
+  <article class="page measure simple-page">
+    <h1>{heading ?? page.title}</h1>
+    <Prose>
+      <Content />
+    </Prose>
+  </article>
+</Base>
+
+<style>
+  .simple-page {
+    padding-block: 3.5rem 7rem;
+  }
+
+  h1 {
+    margin: 0 0 1.875rem;
+    font-size: min(10vw, 4.5rem);
+    letter-spacing: -0.022em;
+    line-height: 1.06;
+  }
+</style>

@@ -1,0 +1,284 @@
+---
+import { render } from 'astro:content';
+import Arrow from '../../components/Arrow.astro';
+import Experience from '../../components/Experience.astro';
+import LocalGraph from '../../components/LocalGraph.astro';
+import Parse from '../../components/Parse.astro';
+import Prose from '../../components/Prose.astro';
+import Base from '../../layouts/Base.astro';
+import {
+  type Post,
+  formatDate,
+  getBacklinks,
+  getNeighbourCount,
+  getPosts,
+  href,
+} from '../../lib/content';
+import { articleSchema, breadcrumbSchema } from '../../lib/schema';
+import { site } from '../../site.config';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.entry.id }, props: { post } }));
+}
+
+const { post } = Astro.props as { post: Post };
+const { Content, headings } = await render(post.entry);
+const { experience, publish, updated } = post.entry.data;
+const backlinks = getBacklinks(post);
+const neighbours = getNeighbourCount(post);
+const sections = headings.filter((heading) => heading.depth === 2);
+
+const absolute = (path: string) => new URL(path, Astro.site).href;
+const url = absolute(post.url);
+const description = post.description ?? site.description;
+const schema = [
+  articleSchema({
+    url,
+    title: post.title,
+    description,
+    image: absolute(href('/og.png')),
+    published: post.date,
+    modified: updated,
+    tags: post.tags,
+  }),
+  breadcrumbSchema([
+    { name: site.name, url: absolute(href('/')) },
+    { name: 'Writing', url: absolute(href('/writing/')) },
+    { name: post.title, url },
+  ]),
+];
+---
+
+<Base
+  title={post.title}
+  {description}
+  noindex={!publish}
+  article={{ published: post.date, modified: updated, tags: post.tags }}
+  {schema}
+>
+  {
+    experience ? (
+      <div class="page experience">
+        <Experience name={experience} post={post}>
+          <Content />
+        </Experience>
+        {backlinks.length > 0 && (
+          <aside class="experience-links">
+            <h2 class="label">Linked from</h2>
+            <ul>
+              {backlinks.map((item) => (
+                <li>
+                  <a href={item.url}>{item.title}</a>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )}
+      </div>
+    ) : (
+      <div class="page post">
+        <a class="back label" href={href('/writing/')}>
+          <Arrow direction="left" /> Writing
+        </a>
+        <article>
+          <header>
+            <h1>
+              <Parse>{post.title}</Parse>
+            </h1>
+            <p class="label meta">
+              {!publish && <span class="draft">Draft</span>}
+              <span>note</span>
+              <time datetime={post.date.toISOString()}>{formatDate(post.date)}</time>
+              {updated && <span>Updated {formatDate(updated)}</span>}
+              {post.tags.map((tag) => (
+                <a href={href(`/tags/${tag}/`)}>#{tag}</a>
+              ))}
+            </p>
+          </header>
+          <Prose>
+            <Content />
+          </Prose>
+        </article>
+        <aside class="rail">
+          {sections.length > 0 && (
+            <nav aria-labelledby="toc-title">
+              <h2 id="toc-title" class="label">
+                In this note
+              </h2>
+              <ul>
+                {sections.map((section) => (
+                  <li>
+                    <a href={`#${section.slug}`}>{section.text}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
+          {backlinks.length > 0 && (
+            <section aria-labelledby="linked-title">
+              <h2 id="linked-title" class="label">
+                Linked from
+              </h2>
+              <ul>
+                {backlinks.map((item) => (
+                  <li>
+                    <a class="linked" href={item.url}>
+                      {item.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+          {neighbours > 0 && <LocalGraph neighbours={neighbours} />}
+        </aside>
+      </div>
+    )
+  }
+</Base>
+
+<style>
+  .post {
+    display: grid;
+    grid-template-columns: 9.375rem minmax(0, 1fr) 14.375rem;
+    gap: 2rem 4rem;
+    align-items: start;
+    padding-block: 3.5rem 7rem;
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 2.125rem;
+    text-decoration: none;
+  }
+
+  header {
+    margin-bottom: 2.25rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: min(9vw, 4.75rem);
+    letter-spacing: -0.024em;
+    line-height: 1.05;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.875rem;
+    margin-top: 0.5625rem;
+  }
+
+  .meta a {
+    text-decoration: none;
+  }
+
+  .draft {
+    padding-inline: 0.4rem;
+    border-radius: 2px;
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+
+  .rail {
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+    padding-top: 2.125rem;
+  }
+
+  .rail h2,
+  .experience-links h2 {
+    margin: 0 0 0.5625rem;
+  }
+
+  .rail ul,
+  .experience-links ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .rail li + li,
+  .experience-links li + li {
+    margin-top: 0.5625rem;
+  }
+
+  .rail li a {
+    font-size: 1.125rem;
+    line-height: 1.3;
+    text-decoration: none;
+  }
+
+  .rail li a.linked {
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+  }
+
+  .rail :global(.local-graph) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: var(--surface);
+  }
+
+  .rail :global(.local-graph line) {
+    stroke: var(--accent);
+    stroke-width: 1.5;
+  }
+
+  .rail :global(.local-graph circle) {
+    fill: var(--muted);
+  }
+
+  .rail :global(.local-graph .here) {
+    fill: var(--accent);
+  }
+
+  .experience {
+    padding-block: 3.5rem 7rem;
+  }
+
+  .experience-links {
+    max-width: var(--measure);
+    margin: 4rem auto 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  @media (max-width: 75rem) {
+    .post {
+      grid-template-columns: minmax(0, 1fr);
+      max-width: calc(var(--measure) + var(--gutter) * 2);
+    }
+
+    .back {
+      padding-top: 0;
+    }
+
+    .rail {
+      position: static;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    .rail :global(.local-graph) {
+      max-width: 15rem;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .post,
+    .experience {
+      padding-block: 1.75rem 4rem;
+    }
+  }
+</style>

@@ -1,0 +1,26 @@
+---
+interface Props {
+  neighbours: number;
+}
+
+const WIDTH = 230;
+const HEIGHT = 150;
+const MAX_SHOWN = 8;
+
+const count = Math.min(Astro.props.neighbours, MAX_SHOWN);
+const centre = { x: WIDTH / 2, y: HEIGHT / 2 };
+const points = Array.from({ length: count }, (_, index) => {
+  const angle = (index / count) * Math.PI * 2 + 0.6;
+  return {
+    x: Math.round(centre.x + Math.cos(angle) * 82),
+    y: Math.round(centre.y + Math.sin(angle) * 50),
+  };
+});
+---
+
+{/* Decorative: the same links are listed in text just above it. */}
+<svg class="local-graph" viewBox={`0 0 ${WIDTH} ${HEIGHT}`} aria-hidden="true">
+  {points.map((point) => <line x1={centre.x} y1={centre.y} x2={point.x} y2={point.y} />)}
+  {points.map((point) => <circle cx={point.x} cy={point.y} r="6" />)}
+  <circle class="here" cx={centre.x} cy={centre.y} r="9" />
+</svg>
