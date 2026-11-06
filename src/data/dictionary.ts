@@ -21,7 +21,8 @@ export const dictionary: DictionaryEntry[] = [
     sense: 'noun · Latin for layers',
     definition:
       'Software built as a stack of machine-readable maps. Each pass reads the one before it, so the map carries the work, not anyone’s memory.',
-    status: 'MIT · not public yet',
+    status: 'MIT · strata-studio.net',
+    href: 'https://strata-studio.net/',
   },
   {
     term: 'MFP',
