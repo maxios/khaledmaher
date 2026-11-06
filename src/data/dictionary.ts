@@ -37,7 +37,7 @@ export const dictionary: DictionaryEntry[] = [
     definition:
       'The Receta library: practical recipes for real-world TypeScript, built on Remeda.',
     status: 'MIT · public',
-    href: 'https://github.com/ontology-io/receta',
+    href: 'https://receta.dev/',
   },
 ];
 
