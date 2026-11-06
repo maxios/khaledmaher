@@ -8,5 +8,12 @@
     "directory": "./dist",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
-  }
+  },
+  // These only work while both hostnames have proxied DNS records.
+  "routes": [
+    { "pattern": "khaledmaher.com/*", "zone_name": "khaledmaher.com" },
+    { "pattern": "www.khaledmaher.com/*", "zone_name": "khaledmaher.com" }
+  ],
+  "workers_dev": false,
+  "preview_urls": false
 }

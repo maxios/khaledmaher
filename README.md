@@ -124,18 +124,11 @@ The site is a Cloudflare Worker named `khaledmaher` that serves `dist/`. No Work
 
 `.github/workflows/deploy.yml` runs the tests, type check and build on every push to `main`, then deploys. It needs a repository secret named `CLOUDFLARE_API_TOKEN`, created from the **Edit Cloudflare Workers** template in the Cloudflare dashboard. To deploy from your own machine, run `bun run build`, then `bun run deploy`.
 
-Canonical URLs always use `https://khaledmaher.com`, even when the site is served from `workers.dev`. Set `SITE_URL` to build for another address, and `BASE_PATH` for a subpath.
+Canonical URLs always use `https://khaledmaher.com`. Set `SITE_URL` to build for another address, and `BASE_PATH` for a subpath.
 
-To serve the site from the domain, it has to be a zone on the same Cloudflare account. Then add this to `wrangler.jsonc` and deploy:
+The domain reaches the Worker through the `routes` in `wrangler.jsonc`. Routes only run on proxied hostnames, so keep the proxied DNS records for `khaledmaher.com` and `www` in Cloudflare, even though the addresses in them are never used.
 
-```jsonc
-"routes": [
-  { "pattern": "khaledmaher.com", "custom_domain": true },
-  { "pattern": "www.khaledmaher.com", "custom_domain": true }
-]
-```
-
-Once the domain is live, verify it in Google Search Console and Bing Webmaster Tools, and submit `sitemap-index.xml` to both.
+After launch, verify the domain in Google Search Console and Bing Webmaster Tools, and submit `sitemap-index.xml` to both.
 
 ## Why some things look the way they do
 
