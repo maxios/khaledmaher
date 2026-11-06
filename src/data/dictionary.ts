@@ -55,6 +55,14 @@ export const dictionary: DictionaryEntry[] = [
     status: 'beta · schedule-bit.io',
     href: 'https://schedule-bit.io/',
   },
+  {
+    term: 'Baton',
+    sense: 'noun · what a relay passes on',
+    definition:
+      'Jobs that cross companies, run in one place. Every hour is held once and every handover is on the record, so nothing gets dropped between them.',
+    status: 'baton.schedule-bit.io',
+    href: 'https://baton.schedule-bit.io/',
+  },
 ];
 
 export const lab = ['git-sem', 'rness', 'Loop intelligence'];
