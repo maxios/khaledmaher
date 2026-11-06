@@ -17,7 +17,7 @@ export const site = {
     'Khaled Maher is a solution architect in Cairo who helps software teams change how they work now that AI makes building cheap.',
   email: 'khaled@mindcache.xyz',
   /** Leave empty to link to the About page instead. */
-  mindcacheUrl: '',
+  mindcacheUrl: 'https://mindcache.xyz/',
   social: {
     github: 'https://github.com/maxios',
     x: 'https://x.com/_kmaher',
