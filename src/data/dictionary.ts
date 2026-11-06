@@ -40,6 +40,14 @@ export const dictionary: DictionaryEntry[] = [
     href: 'https://receta.dev/',
   },
   {
+    term: 'Software Receta',
+    sense: 'noun · a course in kitchen terms',
+    definition:
+      'How software works, for people who work with it but don’t build it. Short narrated lessons, and the first one is free.',
+    status: 'course · receta.academy',
+    href: 'https://receta.academy/',
+  },
+  {
     term: 'schedule-bit',
     sense: 'noun · a scheduling API',
     definition:
