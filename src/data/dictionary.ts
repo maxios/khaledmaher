@@ -39,6 +39,14 @@ export const dictionary: DictionaryEntry[] = [
     status: 'MIT · public',
     href: 'https://receta.dev/',
   },
+  {
+    term: 'schedule-bit',
+    sense: 'noun · a scheduling API',
+    definition:
+      'Scheduling that never double-books. Book rooms, machines and people through one API, and always get a yes or a clear reason why not.',
+    status: 'beta · schedule-bit.io',
+    href: 'https://schedule-bit.io/',
+  },
 ];
 
 export const lab = ['git-sem', 'rness', 'Loop intelligence'];
