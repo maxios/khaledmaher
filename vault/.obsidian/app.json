@@ -1,8 +1,0 @@
-{
-  "attachmentFolderPath": "attachments",
-  "newFileLocation": "folder",
-  "newFileFolderPath": "posts",
-  "newLinkFormat": "shortest",
-  "useMarkdownLinks": false,
-  "alwaysUpdateLinks": true
-}

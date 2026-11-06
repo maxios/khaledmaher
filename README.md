@@ -1,6 +1,6 @@
 # khaledmaher
 
-The source of [khaledmaher.com](https://khaledmaher.com). Posts are written in Obsidian, built with Astro, and deployed to Cloudflare on every push to `main`. The design lives in `design/khaledmaher-site.pen`, with its brand sheet in the same file.
+The source of [khaledmaher.com](https://khaledmaher.com). Posts are written in Obsidian, built with Astro, and deployed to Cloudflare on every push to `main` here or in the private [khaledmaher-vault](https://github.com/maxios/khaledmaher-vault) repository, which holds the notes. The design lives in `design/khaledmaher-site.pen`, with its brand sheet in the same file.
 
 ## Getting started
 
@@ -9,8 +9,11 @@ You need [Bun](https://bun.sh) and Node 24. Astro 7 won't start on older version
 ```sh
 nvm use
 bun install
+git clone git@github.com:maxios/khaledmaher-vault.git vault
 bun run dev
 ```
+
+The site won't build without that clone. This repository ignores `vault/`, so Git commands for your notes run inside that folder.
 
 In Obsidian, choose **Open folder as vault** and pick the `vault/` folder.
 
@@ -43,9 +46,33 @@ publish: true
 **Nothing appears on the site until it has `publish: true`.** A published post also needs a `date` and a `description`, and the build stops without them. Drafts show up under `bun run dev` with a Draft badge, and they're left out of production builds entirely: pages, feed, sitemap, graph and images.
 
 > [!warning]
-> That only protects the built site. If this repository is public, every file in `vault/` can be read on GitHub, including drafts and `%%comments%%`. Keep private material out of the repository, or keep the repository private.
+> Drafts and `%%comments%%` are private because `khaledmaher-vault` is. Keep that repository private. Notes committed before the move to it are still in this public repository's history.
 
 Notes in `vault/pages/` become top-level pages. `About.md` holds the words of `/about/`, and its layout is in `src/pages/about.astro`. Put a photo at `src/assets/portrait.jpg` and it appears on that page. Notes anywhere else can be used for your own reference and are never published.
+
+To publish from the Mac, push the vault. Pull first, in case the phone got there before you.
+
+```sh
+cd vault
+git pull
+git add -A && git commit -m "Publish the new post"
+git push
+```
+
+## Writing on an iPhone
+
+The phone runs Obsidian, and [Working Copy](https://workingcopy.app) does the Git work. Pushing and linking a folder both need its Pro unlock.
+
+1. In Obsidian, create an empty vault named `khaledmaher`, stored on the device rather than in iCloud.
+2. In Working Copy, sign in to GitHub as `maxios` and clone `khaledmaher-vault`.
+3. From the repository's title menu, choose **Link Repository to Folder** and pick the vault you created.
+4. Reopen the vault in Obsidian. Your posts and templates should be there.
+
+To publish, set `publish: true` on the note, then tap **Sync Now** in Working Copy. That commits, pulls and pushes in one step, and the site rebuilds within a couple of minutes. The **Sync Repository** action in Shortcuts does the same from the Home Screen.
+
+Leave **Auto-Sync** off. It pushes whenever it sees a change, and every push starts a build.
+
+Use one sync method per vault. Obsidian warns that syncing a vault through two services can corrupt it.
 
 ## What works
 
@@ -122,7 +149,13 @@ Grammar labels in the hero are CSS content on purpose. As text, they would becom
 
 The site is a Cloudflare Worker named `khaledmaher` that serves `dist/`. No Worker code runs, and the settings are in `wrangler.jsonc`.
 
-`.github/workflows/deploy.yml` runs the tests, type check and build on every push to `main`, then deploys. It needs a repository secret named `CLOUDFLARE_API_TOKEN`, created from the **Edit Cloudflare Workers** template in the Cloudflare dashboard. To deploy from your own machine, run `bun run build`, then `bun run deploy`.
+`.github/workflows/deploy.yml` checks out the notes, runs the tests, type check and build, then deploys. It runs on every push to `main`. A push to `khaledmaher-vault` starts it too, through a `repository_dispatch` event, and that event only reaches workflows on the default branch, so `main` has to stay the default. If a build fails, the site stays as it was. To deploy from your own machine, run `bun run build`, then `bun run deploy`.
+
+| Secret                 | Repository          | What it is                                                                   |
+| ---------------------- | ------------------- | ---------------------------------------------------------------------------- |
+| `CLOUDFLARE_API_TOKEN` | `khaledmaher`       | From the **Edit Cloudflare Workers** template in the Cloudflare dashboard    |
+| `VAULT_DEPLOY_KEY`     | `khaledmaher`       | Private half of the read-only deploy key on `khaledmaher-vault`              |
+| `SITE_DISPATCH_TOKEN`  | `khaledmaher-vault` | Fine-grained token for `khaledmaher` only, with **Contents** set to write    |
 
 Canonical URLs always use `https://khaledmaher.com`. Set `SITE_URL` to build for another address, and `BASE_PATH` for a subpath.
 
@@ -132,6 +165,7 @@ After launch, verify the domain in Google Search Console and Bing Webmaster Tool
 
 ## Why some things look the way they do
 
+- **The notes have their own repository.** This one is public, and Working Copy links whole repositories rather than folders, so a vault inside this repository would bring `src/` to the phone.
 - **Scripts run Astro on Node, not Bun.** The Bun runtime crashes loading React's server build. Bun still installs packages, runs scripts and runs the tests.
 - **`build` passes `--force`.** Astro caches each note by its own text, so publishing a note wouldn't update the links to it in other notes.
 - **The vault code uses `unified()` instead of Astro's default Markdown processor.** It gives access to the remark plugin ecosystem, and the vault code is a remark plugin.

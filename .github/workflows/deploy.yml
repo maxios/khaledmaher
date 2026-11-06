@@ -3,6 +3,9 @@ name: Deploy
 on:
   push:
     branches: [main]
+  # Sent by khaledmaher-vault whenever the notes change.
+  repository_dispatch:
+    types: [vault-updated]
   workflow_dispatch:
 
 permissions:
@@ -18,6 +21,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      # The notes are in a private repository, so drafts stay off public GitHub.
+      - uses: actions/checkout@v7
+        with:
+          repository: maxios/khaledmaher-vault
+          ssh-key: ${{ secrets.VAULT_DEPLOY_KEY }}
+          path: vault
       - uses: oven-sh/setup-bun@v2
       # Astro runs on Node: the Bun runtime can't load React's SSR build.
       - uses: actions/setup-node@v7
