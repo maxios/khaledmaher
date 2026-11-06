@@ -10,6 +10,7 @@
     "build": "astro build --force",
     "preview": "astro preview",
     "check": "astro check",
+    "deploy": "wrangler deploy",
     "test": "bun test"
   },
   "dependencies": {
@@ -45,7 +46,8 @@
     "remark-rehype": "^11.1.2",
     "typescript": "^6.0.3",
     "unified": "^11.0.5",
-    "vfile": "^6.0.3"
+    "vfile": "^6.0.3",
+    "wrangler": "^4.158.0"
   },
   "overrides": {
     "@emnapi/runtime": "1.11.3"

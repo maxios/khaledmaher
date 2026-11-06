@@ -6,7 +6,7 @@ import remarkSmartypants from 'remark-smartypants';
 import { remarkObsidian } from './src/vault/remark';
 import { getVault } from './src/vault/vault';
 
-// The deploy workflow sets these from the GitHub Pages configuration.
+// Set these to build for another address. Canonical URLs follow `SITE_URL`.
 const site = process.env.SITE_URL || 'https://khaledmaher.com';
 const base = process.env.BASE_PATH || '/';
 

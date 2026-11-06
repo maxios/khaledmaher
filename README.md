@@ -1,6 +1,6 @@
 # khaledmaher
 
-The source of [khaledmaher.com](https://khaledmaher.com). Posts are written in Obsidian, built with Astro, and deployed to GitHub Pages on every push to `main`. The design lives in `design/khaledmaher-site.pen`, with its brand sheet in the same file.
+The source of [khaledmaher.com](https://khaledmaher.com). Posts are written in Obsidian, built with Astro, and deployed to Cloudflare on every push to `main`. The design lives in `design/khaledmaher-site.pen`, with its brand sheet in the same file.
 
 ## Getting started
 
@@ -21,6 +21,7 @@ In Obsidian, choose **Open folder as vault** and pick the `vault/` folder.
 | `bun run preview` | Serves `dist/` (runs in background; `bunx astro preview stop` ends it) |
 | `bun test`        | Tests for the vault and Markdown code |
 | `bun run check`   | Type check                           |
+| `bun run deploy`  | Uploads `dist/` to Cloudflare        |
 
 ## Writing a post
 
@@ -119,9 +120,22 @@ Grammar labels in the hero are CSS content on purpose. As text, they would becom
 
 ## Deploying
 
-`.github/workflows/deploy.yml` runs the tests, type check and build, then publishes to GitHub Pages. In the repository settings, set **Pages → Source** to **GitHub Actions** and set the custom domain to `khaledmaher.com`. The workflow reads the site URL and subpath from those settings, so canonical URLs match wherever the site is served.
+The site is a Cloudflare Worker named `khaledmaher` that serves `dist/`. No Worker code runs, and the settings are in `wrangler.jsonc`.
 
-After the first deploy, verify the domain in Google Search Console and Bing Webmaster Tools, and submit `sitemap-index.xml` to both.
+`.github/workflows/deploy.yml` runs the tests, type check and build on every push to `main`, then deploys. It needs a repository secret named `CLOUDFLARE_API_TOKEN`, created from the **Edit Cloudflare Workers** template in the Cloudflare dashboard. To deploy from your own machine, run `bun run build`, then `bun run deploy`.
+
+Canonical URLs always use `https://khaledmaher.com`, even when the site is served from `workers.dev`. Set `SITE_URL` to build for another address, and `BASE_PATH` for a subpath.
+
+To serve the site from the domain, it has to be a zone on the same Cloudflare account. Then add this to `wrangler.jsonc` and deploy:
+
+```jsonc
+"routes": [
+  { "pattern": "khaledmaher.com", "custom_domain": true },
+  { "pattern": "www.khaledmaher.com", "custom_domain": true }
+]
+```
+
+Once the domain is live, verify it in Google Search Console and Bing Webmaster Tools, and submit `sitemap-index.xml` to both.
 
 ## Why some things look the way they do
 

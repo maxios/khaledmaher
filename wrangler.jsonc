@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "khaledmaher",
+  "account_id": "6dbce347b834044f4d24fcc474a1d673",
+  "compatibility_date": "2026-11-06",
+  // A static site: Cloudflare serves dist/ and no Worker code runs.
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
