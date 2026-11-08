@@ -63,6 +63,14 @@ export const dictionary: DictionaryEntry[] = [
     status: 'baton.schedule-bit.io',
     href: 'https://baton.schedule-bit.io/',
   },
+  {
+    term: 'Kaizu',
+    sense: 'noun · points, streaks and badges',
+    definition:
+      'A game engine for products that aren’t games. Write the rules as data, send what your users do, and Kaizu keeps score and tells you what changed.',
+    status: 'in design · usekaizu.io',
+    href: 'https://usekaizu.io/',
+  },
 ];
 
 export const lab = ['git-sem', 'rness', 'Loop intelligence'];
